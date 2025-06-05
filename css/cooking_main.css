@@ -37,11 +37,14 @@
     }
 
     .logo-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.1rem;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  gap: 0.1rem;
+  width: fit-content;          /* 내용물만큼 너비 */
+  margin-left: -20px;          /* 왼쪽으로 약간 이동 */
+}
+
 
     .logo {
       width: 60px;
