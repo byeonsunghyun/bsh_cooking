@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>나의 요리 블로그</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link rel="icon" href="/image/icon.png" type="image/png">
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --accent-color: #000000;
+      --card-bg: #f9f9f9;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      font-family: 'Nanum Gothic', sans-serif;
+    }
+
+    .wrapper {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.4rem 0.7rem;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.1rem;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-color);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #f4f4f4;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      font-weight:bold;
+    }
+
+    nav a {
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: var(--text-color);
+      border-right: 1px solid #ccc;
+      flex: 1 1 auto;
+      text-align: center;
+      min-width: 100px;
+      font-weight:bold;
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
+
+    nav a:hover {
+      background-color: #eaeaea;
+      color: var(--accent-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .recipe-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* 여기만 변경 */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+        cursor: pointer;
+      
+    }
+
+    .recipe-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .image-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recipe-content {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      background-color: #fafafa;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .recipe-content h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: var(--accent-color);
+    }
+
+    .recipe-content p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+  padding: 1.4rem 0.7rem; /* ⬅️ 여기 줄임 */
+      font-size: 0.9rem;
+      color: #999;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    @media (max-width: 600px) {
+    	  .title {
+    font-size: 1.6rem; /* 모바일에서 더 작게 */
+  }
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      nav {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+      }
+
+      nav a {
+        flex: 1;
+        border-right: 1px solid #ccc;
+        border-bottom: none;
+        min-width: auto;
+        padding: 1rem 0.8rem;
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
+
+      nav a:last-child {
+        border-right: none;
+      }
+    }
+    
+    #scrollToTopBtn {
+  position: fixed;
+  bottom: 60px;
+  right: 50px;
+  z-index: 1000;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+#scrollToTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+}
+    
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="logo-wrap">
+        <img src="/image/logo.png" alt="로고" class="logo" />
+        <span class="title">나의 요리 블로그</span>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#">한식</a>
+      <a href="#">양식</a>
+      <a href="#">일식</a>
+      <a href="#">중식</a>
+    </nav>
+
+    <div class="container">
+      <div class="recipe-card">
+        <div class="image-wrap">
+          <img src="/image/airplane.png" alt="김치볶음밥" />
+        </div>
+        <div class="recipe-content">
+          <h3>김치볶음밥</h3>
+          <p>매콤하고 고소한 한끼 레시피!</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>© Byeon Sung Hyun. All rights reserved.</footer>
+    
+    <button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
+    
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.recipe-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+    
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollBtn.classList.add('show');
+      } else {
+        scrollBtn.classList.remove('show');
+      }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+  </script>
+</body>
+</html>
