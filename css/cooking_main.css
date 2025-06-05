@@ -163,13 +163,13 @@
     }
 
     footer {
-      margin-top: auto;
-      text-align: center;
-  padding: 1.4rem 0.7rem; /* ⬅️ 여기 줄임 */
-      font-size: 0.9rem;
-      color: #999;
-      border-top: 1px solid #e0e0e0;
-    }
+  text-align: center;
+  padding: 24px 0;
+  background-color: #f8f8f8;
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 80px;
+}
 
     @media (max-width: 600px) {
     	  .title {
