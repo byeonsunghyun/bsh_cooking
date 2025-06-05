@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>나의 요리 블로그</title>
+  <title>나의 요리 레시피</title>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
   <link rel="icon" href="./image/icon.png" type="image/png">
   <link rel="stylesheet" href="css/cooking_main.css">
@@ -11,32 +11,65 @@
 <body>
   <div class="wrapper">
     <header>
-      <div class="logo-wrap">
-        <img src="./image/logo.png" alt="로고" class="logo" />
-        <span class="title">나의 요리 블로그</span>
-      </div>
-    </header>
+	  <a href="cooking_main" class="logo-link">
+	    <div class="logo-wrap">
+	      <img src="./image/logo.png" alt="로고" class="logo" />
+	      <span class="title">나의 요리 레시피</span>
+	    </div>
+	  </a>
+	</header>
 
     <nav>
-      <a href="#">한식</a>
-      <a href="#">양식</a>
+      <a href="korean_food">한식</a>
+      <a href="western_food">양식</a>
+      <a href="chinese_food">중식</a>
       <a href="#">일식</a>
-      <a href="#">중식</a>
     </nav>
 
     <div class="container">
-      <div class="recipe-card">
+    
+      <a href="/bsh_cooking/western_food/spaghetti" class="recipe-card">
         <div class="image-wrap">
-          <img src="./image/airplane.png" alt="김치볶음밥" />
+          <img src="./image/spagetti.jpg" alt="토마토 새우 스파게티" />
         </div>
         <div class="recipe-content">
-          <h3>김치볶음밥</h3>
-          <p>매콤하고 고소한 한끼 레시피!</p>
+          <h3>토마토 새우 스파게티</h3>
+          <p>탱글한 새우와 상큼한 토마토 소스의 조화!</p>
         </div>
-      </div>
+      </a>
+      
+      <a href="/bsh_cooking/korean_food/egg" class="recipe-card">
+        <div class="image-wrap">
+          <img src="./image/egg.jpg" alt="맛계란" />
+        </div>
+        <div class="recipe-content">
+          <h3>맛계란</h3>
+          <p>밥도둑 짭조름한 반숙 계란 간장조림!</p>
+        </div>
+      </a>
+      
+      <a href="/bsh_cooking/korean_food/cube_kimchi" class="recipe-card">
+        <div class="image-wrap">
+          <img src="/image/cube_kimchi.jpg" alt="치킨무 깍두기" />
+        </div>
+        <div class="recipe-content">
+          <h3>치킨무 깍두기</h3>
+          <p>아삭하고 시원한 입가심 무 반찬!</p>
+        </div>
+      </a>
+      
+      <a href="/bsh_cooking/chinese_food/tomato_egg" class="recipe-card">
+        <div class="image-wrap">
+          <img src="./image/tomato_egg.jpg" alt="토마토 계란 밥" />
+        </div>
+        <div class="recipe-content">
+          <h3>토마토 계란 밥</h3>
+          <p>부드러운 계란과 토마토가 어우러진 맛!</p>
+        </div>
+      </a>
     </div>
 
-    <footer>© Byeon Sung Hyun. All rights reserved.</footer>
+    <footer>© 2025 Byeon Sung Hyun. All rights reserved.</footer>
     
     <button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
     
