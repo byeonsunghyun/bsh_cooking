@@ -3,214 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/cooking_main.css">
-  <title>토마토 새우 스파게티</title>
-  <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="./image/icon.png" type="image/png">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-
-body {
-  margin: 0;
-  font-family: 'Nanum Gothic', sans-serif;
-  background-color: #fffefc;
-  color: #333;
-  line-height: 1.6;
-}
-
-main.recipe-detail {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.recipe-detail h1 {
-  font-size: 1.7rem;
-  color: #e94e38;
-  margin-bottom: 0.2em;
-}
-
-.subtitle {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 24px;
-  text-align:center;
-}
-
-.recipe-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1 / 1;
-  margin: 0 auto 32px;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-
-.recipe-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* ✅ 비율 맞게 자르기 */
-  display: block;
-  align-items: center;
-}
-
-
-.recipe-info, .recipe-steps, .tip-box {
-  margin-bottom: 40px;
-}
-
-.recipe-info h2,
-.recipe-steps h2,
-.tip-box h2 {
-  font-size: 1.4rem;
-  margin-bottom: 12px;
-  color: #ff6f61;
-}
-
-.recipe-info ul {
-  list-style: disc;
-  padding-left: 20px;
-}
-
-.recipe-steps ol {
-  padding-left: 20px;
-}
-
-.tip-box {
-  background-color: #fff0ec;
-  padding: 16px;
-  border-left: 6px solid #ff6f61;
-  border-radius: 8px;
-}
-
-footer {
-  text-align: center;
-  padding: 24px 0;
-  background-color: #f8f8f8;
-  color: #888;
-  font-size: 0.9rem;
-  margin-top: 80px;
-}
-
-/* 애니메이션 효과 */
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.recipe-detail h1,
-.subtitle,
-.recipe-image,
-.recipe-info,
-.recipe-steps,
-.tip-box {
-  animation: fadeUp 0.8s ease both;
-  animation-delay: 0.1s;
-}
-
-/* 요소별로 딜레이 다르게 주면 더 자연스러움 */
-.recipe-detail h1 { animation-delay: 0.1s; }
-.subtitle { animation-delay: 0.2s; }
-.recipe-image { animation-delay: 0.3s; }
-.recipe-info { animation-delay: 0.4s; }
-.recipe-steps { animation-delay: 0.5s; }
-.tip-box { animation-delay: 0.6s; }
-
-/* 반응형 처리 */
-@media screen and (max-width: 600px) {
-  main.recipe-detail {
-    padding: 0 16px;
-    margin: 20px auto;
-  }
-  
-  .subtitle {
-  font-size: 0.85rem;
-}
-
-  .recipe-detail h1 {
-    font-size: 1.4rem;
-  }
-
-  .recipe-info h2,
-  .recipe-steps h2,
-  .tip-box h2 {
-    font-size: 1.0rem;
-  }
-
-  .recipe-image {
-  max-width: 70%;
-  aspect-ratio: 1 / 1;
-  margin-bottom: 24px;
-}
-
-  .recipe-info ul,
-  .recipe-steps ol {
-    font-size: 0.95rem;
-  }
-
-  footer {
-    font-size: 0.8rem;
-  }
-}
-
-  </style>
+    <link rel="stylesheet" href="../css/cooking_main.css">
+	<link rel="stylesheet" href="../css/cooking_recipe.css">
+  <title>토마토 계란 밥</title>
+    <link rel="icon" href="../image/icon.png" type="image/png">
 </head>
 <body>
   <header>
-    <a href="cooking_main" class="logo-link">
+    <a href="../cooking_main" class="logo-link">
       <div class="logo-wrap">
-        <img src="./image/logo.png" alt="로고" class="logo" />
+        <img src="../image/logo.png" alt="로고" class="logo" />
         <span class="title">나의 요리 레시피</span>
       </div>
     </a>
   </header>
 
   <main class="recipe-detail">
-    <h1 style="text-align:center;">- 토마토 새우 스파게티 -</h1>
-    <p class="subtitle">탱글한 새우와 상큼한 토마토 소스가 어우러진 이탈리안풍 파스타</p>
+    <h1 style="text-align:center;">- 토마토 계란 밥 -</h1>
+    <p class="subtitle">부드러운 계란과 토마토가 어우러진 맛!</p>
 
     <div class="recipe-image">
-      <img src="./image/spagetti.jpg" alt="토마토 새우 스파게티" />
+      <img src="../image/tomato_egg.jpg" alt="토마토 계란 밥" />
     </div>
 
     <section class="recipe-info">
       <h2>📝 재료</h2>
       <ul>
-        <li>스파게티 면 - 100g</li>
-        <li>중간 크기 새우 - 6~8마리</li>
-        <li>토마토 소스 - 1컵</li>
-        <li>마늘 - 2쪽 (다진 것)</li>
-        <li>양파 - 1/4개 (다진 것)</li>
-        <li>올리브유, 소금, 후추, 파슬리 약간</li>
+        <li>토마토 4개</li>
+		<li>대파 1/2개</li>
+        <li>계란 2개</li>
+        <li>진간장 한 큰술</li>
+		<li>굴소스 한 큰술</li>
+		<li>후추</li>
       </ul>
     </section>
 
     <section class="recipe-steps">
       <h2>🍳 만드는 법</h2>
-      <ol>
-        <li>스파게티 면을 삶아 찬물에 헹군 후 물기를 빼둡니다.</li>
-        <li>팬에 올리브유를 두르고 마늘과 양파를 볶습니다.</li>
-        <li>새우를 넣고 익을 때까지 볶다가 토마토 소스를 부어 끓입니다.</li>
-        <li>삶은 면을 넣고 잘 섞으며 중약불로 볶아줍니다.</li>
-        <li>간을 보고 소금, 후추로 조절한 뒤 파슬리로 마무리!</li>
-      </ol>
+	  <ol>
+	    <li>계란 2개를 풀어 스크램블로 만들어 준비합니다.</li>
+	    <li>대파는 둥글게 송송 썰어줍니다.</li>
+	    <li>팬에 기름을 두르고 대파를 넣어 볶아 파기름을 만듭니다.</li>
+	    <li>파기름이 올라오면 토마토, 진간장, 굴소스를 넣고 함께 볶습니다.</li>
+	    <li>소스가 자글자글 끓으면 준비한 계란을 넣고 잘 섞어줍니다.</li>
+	    <li>완성된 소스를 밥 위에 올리고 후추를 약간 뿌려 마무리합니다.</li>
+	  </ol>
     </section>
 
-    <section class="tip-box">
-      <h2>💡 요리 팁</h2>
-      <p>새우 대신 오징어나 닭가슴살을 넣어도 잘 어울려요!</p>
-    </section>
+	<section class="tip-box">
+	  <h2>💡 TIP</h2>
+	  <p>후추를 살짝 뿌려야 진짜 맛이 완성돼요!</p>
+	</section>
   </main>
 
   <footer>
