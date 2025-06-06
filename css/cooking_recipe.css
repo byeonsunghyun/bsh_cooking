@@ -155,7 +155,7 @@ footer {
 @media screen and (max-width: 600px) {
   main.recipe-detail {
     padding: 0 16px;
-    margin: 20px auto;
+    margin: 30px auto;
   }
 
   .recipe-detail h1 {
