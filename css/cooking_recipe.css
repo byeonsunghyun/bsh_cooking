@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&display=swap');
 
 /* 기본 설정 */
 html, body {
@@ -9,7 +9,7 @@ html, body {
 
 body {
   font-family: 'Nanum Gothic', sans-serif;
-  background-color: #fffefc;
+  background-color: #fffdfb;
   color: #333;
   line-height: 1.6;
   display: flex;
@@ -26,10 +26,12 @@ main.recipe-detail {
 }
 
 .recipe-detail h1 {
-  font-size: 1.7rem;
-  color: #e94e38;
+  font-size: 2rem;
+  color: #ff6f61;
+  font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
   margin-bottom: 0.2em;
   text-align: center;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
@@ -37,6 +39,7 @@ main.recipe-detail {
   color: #666;
   margin-bottom: 24px;
   text-align: center;
+  font-style: italic;
 }
 
 /* 모바일에서 subtitle 너비 제한 */
@@ -57,8 +60,8 @@ main.recipe-detail {
   aspect-ratio: 1 / 1;
   margin: 0 auto 32px;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .recipe-image img {
@@ -66,15 +69,14 @@ main.recipe-detail {
   height: 100%;
   object-fit: cover;
   display: block;
-  align-items: center;
 }
 
 .recipe-info,
 .recipe-steps,
 .tip-box {
-  max-width: 600px;
+  max-width: 640px;
   width: 100%;
-  margin: 0 auto 40px;
+  margin: 0 auto 48px;
   text-align: left;
 }
 
@@ -84,42 +86,43 @@ main.recipe-detail {
   font-size: 1.4rem;
   margin-bottom: 12px;
   color: #ff6f61;
+  font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
 }
 
 .recipe-info ul,
 .recipe-steps ol {
-  width: 100%;
-  margin: 0;
-  padding-left: 20px;
+  padding-left: 22px;
   box-sizing: border-box;
   display: block;
   text-align: left;
+  font-size: 1rem;
 }
 
 .recipe-info li,
 .recipe-steps li {
-  width: 100%;
-  max-width: 100%;
   word-break: break-word;
   line-height: 1.8;
+  margin-bottom: 0.6rem;
 }
 
 /* 팁 박스 */
 .tip-box {
   background-color: #fff0ec;
-  padding: 16px;
+  padding: 18px 20px;
   border-left: 6px solid #ff6f61;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(255, 111, 97, 0.1);
 }
 
 /* 푸터 */
 footer {
   text-align: center;
   padding: 24px 0;
-  background-color: #f8f8f8;
-  color: #888;
+  background-color: #fff8f6; /* 공통 스타일과 동일하게 맞춤 */
+  color: #aa7770; /* 부드러운 텍스트 색상 */
   font-size: 0.9rem;
   margin-top: 80px;
+  border-top: 1px solid #f2dcd7;
 }
 
 /* 애니메이션 효과 */
@@ -159,13 +162,13 @@ footer {
   }
 
   .recipe-detail h1 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .recipe-info h2,
   .recipe-steps h2,
   .tip-box h2 {
-    font-size: 1.0rem;
+    font-size: 1.1rem;
   }
 
   .recipe-image {
