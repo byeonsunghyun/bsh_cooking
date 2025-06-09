@@ -172,13 +172,13 @@ a.recipe-card {
 }
 
 footer {
-  margin-top: auto;
   text-align: center;
-  padding: 1.4rem 0.7rem;
+  padding: 24px 0;
+  background-color: #fff8f6; /* 공통 스타일과 동일하게 맞춤 */
+  color: #aa7770; /* 부드러운 텍스트 색상 */
   font-size: 0.9rem;
-  color: #888;
-  border-top: 1px solid #e0e0e0;
-  background-color: #fff8f6;
+  margin-top: 80px;
+  border-top: 1px solid #f2dcd7;
 }
 
 @media (max-width: 600px) {
