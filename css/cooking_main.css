@@ -104,6 +104,7 @@ nav a:hover {
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
   width: 100%;
+  flex: 1;
 }
 
 /* recipe-wrapper: 카드+텍스트 묶음 */
