@@ -3,9 +3,9 @@
 :root {
   --bg-color: #ffffff;
   --text-color: #111111;
-  --accent-color: #ff6f61; /* 따뜻한 포인트 컬러 */
+  --accent-color: #e94e4e; /* 좀 더 모던한 레드 */
   --card-bg: #fffdfd;
-  --shadow: rgba(0, 0, 0, 0.1);
+  /* --shadow 제거 (사용 안함) */
 }
 
 * {
@@ -21,7 +21,7 @@ html, body {
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  line-height: 1.6;
+  line-height: 1.5; /* 약간 줄임 */
   font-family: 'Nanum Gothic', sans-serif;
 }
 
@@ -32,11 +32,11 @@ body {
 }
 
 header {
-  padding: 1.8rem 1rem;
+  padding: 0.8rem 1rem;
   text-align: center;
   background: linear-gradient(to right, #ffefef, #fff5f5);
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 4px var(--shadow);
+  border-bottom: 1px solid #ffd8d2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-wrap {
@@ -49,13 +49,13 @@ header {
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 }
 
 .title {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 900;
   font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
   color: var(--accent-color);
@@ -66,7 +66,7 @@ nav {
   top: 0;
   z-index: 1000;
   background-color: #fff4f2;
-  border-top: 1px solid #ffd8d2;
+  border-top: none;
   border-bottom: 1px solid #ffd8d2;
   display: flex;
   justify-content: center;
@@ -84,6 +84,7 @@ nav a {
   text-align: center;
   min-width: 100px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.9rem;
 }
 
 nav a:last-child {
@@ -91,7 +92,7 @@ nav a:last-child {
 }
 
 nav a:hover {
-  background-color: #ffe9e4;
+  background-color: rgba(233, 78, 78, 0.1);
   color: var(--accent-color);
 }
 
@@ -105,23 +106,26 @@ nav a:hover {
   width: 100%;
 }
 
+/* recipe-wrapper: 카드+텍스트 묶음 */
+.recipe-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 카드 스타일 - 그림자 제거 */
 .recipe-card {
   background-color: var(--card-bg);
   border-radius: 12px;
   border: 1px solid #f1f1f1;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.4s ease;
-}
-
-a.recipe-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  box-shadow: none; /* 그림자 제거 */
+  will-change: opacity, transform;
 }
 
 .recipe-card.show {
@@ -130,8 +134,8 @@ a.recipe-card {
 }
 
 .recipe-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(0) scale(1); /* 카드 이동, 크기변경 없음 */
+  box-shadow: none;
 }
 
 .image-wrap {
@@ -142,46 +146,64 @@ a.recipe-card {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
 }
 
 .image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.recipe-content {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 0 0 12px 12px;
+/* 호버 시 이미지 내부에서만 확대 */
+.recipe-card:hover .image-wrap img {
+  transform: scale(1.05);
 }
 
-.recipe-content h3 {
+/* 텍스트 영역 - 카드 밖, 배경 없이 글자만 */
+.recipe-text {
+  margin-top: 0.5rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.recipe-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.recipe-text h3 {
   margin-bottom: 0.5rem;
-  font-size: 1.15rem;
+  font-size: 1.0rem;
   color: var(--accent-color);
   font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
-.recipe-content p {
-  font-size: 0.95rem;
+.recipe-text p {
+  font-size: 0.8rem;
   color: #555;
+  letter-spacing: 0.02em;
 }
 
 footer {
   text-align: center;
   padding: 24px 0;
-  background-color: #fff8f6; /* 공통 스타일과 동일하게 맞춤 */
-  color: #aa7770; /* 부드러운 텍스트 색상 */
+  background-color: #fff8f6;
+  color: #aa7770;
   font-size: 0.9rem;
   margin-top: 80px;
   border-top: 1px solid #f2dcd7;
 }
 
 @media (max-width: 600px) {
+  header {
+    padding: 0.4rem 1rem;
+  }
+  
   .title {
     font-size: 1.6rem;
   }
@@ -194,6 +216,16 @@ footer {
     flex-direction: row;
     flex-wrap: nowrap;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* 부드러운 터치 스크롤 */
+  }
+
+  nav::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  nav::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 3px;
   }
 
   nav a {
@@ -208,6 +240,19 @@ footer {
 
   nav a:last-child {
     border-right: none;
+  }
+  
+  .recipe-text h3 {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .recipe-text p {
+    font-size: 0.65rem;
+  }
+
+  footer {
+    font-size: 0.7rem;
   }
 }
 
