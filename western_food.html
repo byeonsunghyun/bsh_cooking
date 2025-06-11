@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>나의 요리 블로그</title>
+  <title>나의 요리 레시피</title>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
   <link rel="icon" href="./image/icon.png" type="image/png">
   <link rel="stylesheet" href="css/cooking_main.css">
@@ -20,24 +20,39 @@
 	</header>
 
     <nav>
-      <a href="korean_food">한식</a>
-      <a href="western_food">양식</a>
-      <a href="chinese_food">중식</a>
-      <a href="japanese_food">일식</a>
+      <a href="korean_food">한식 🍚</a>
+      <a href="western_food">양식 🍜</a>
+      <a href="chinese_food">중식 🍝</a>
+      <a href="japanese_food">일식 🍣</a>
     </nav>
 
     <div class="container">
     
-      <a href="/bsh_cooking/western_food/spaghetti" class="recipe-card">
-        <div class="image-wrap">
-          <img src="./image/spagetti.jpg" alt="토마토 새우 스파게티" />
-        </div>
-        <div class="recipe-content">
-          <h3>토마토 새우 스파게티</h3>
-          <p>새우와 상큼한 토마토 소스의 조화!</p>
-        </div>
-      </a>
+    <div class="recipe-wrapper">
+    <a href="/bsh_cooking/western_food/vongole" class="recipe-card">
+      <div class="image-wrap">
+        <img src="./image/vongole.jpg" alt="봉골래 파스타" />
+      </div>
+    </a>
+    <div class="recipe-text">
+      <h3>봉골래 파스타</h3>
+      <p>화이트와인 향에 칼칼함을 더한 파스타!</p>
     </div>
+  </div>
+    
+    <div class="recipe-wrapper">
+    <a href="/bsh_cooking/western_food/spaghetti" class="recipe-card">
+      <div class="image-wrap">
+        <img src="./image/spagetti.jpg" alt="토마토 새우 스파게티" />
+      </div>
+    </a>
+    <div class="recipe-text">
+      <h3>토마토 새우 스파게티</h3>
+      <p>탱글한 새우와 상큼한 토마토 소스의 조화!</p>
+    </div>
+  </div>
+</div>
+
 
     <footer>© 2025 Byeon Sung Hyun. All rights reserved.</footer>
     
@@ -47,6 +62,8 @@
 
   <script>
     const cards = document.querySelectorAll('.recipe-card');
+    const texts = document.querySelectorAll('.recipe-text');
+    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -57,9 +74,8 @@
       threshold: 0.2
     });
 
-    cards.forEach(card => {
-      observer.observe(card);
-    });
+    cards.forEach(card => observer.observe(card));
+    texts.forEach(text => observer.observe(text));
     
     const scrollBtn = document.getElementById('scrollToTopBtn');
 
