@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>나의 요리 레시피</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link rel="icon" href="./image/icon.png" type="image/png">
+  <link rel="stylesheet" href="css/cooking_main.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+	  <a href="cooking_main" class="logo-link">
+	    <div class="logo-wrap">
+	      <img src="./image/logo.png" alt="로고" class="logo" />
+	      <span class="title">나의 요리 레시피</span>
+	    </div>
+	  </a>
+	</header>
+
+    <nav>
+      <a href="korean_food">한식 🍚</a>
+      <a href="western_food">양식 🍜</a>
+      <a href="chinese_food">중식 🍝</a>
+      <a href="japanese_food">일식 🍣</a>
+    </nav>
+
+    <div class="container">
+
+    </div>
+
+
+    <footer>© 2025 Byeon Sung Hyun. All rights reserved.</footer>
+    
+    <button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
+    
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.recipe-card');
+    const texts = document.querySelectorAll('.recipe-text');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    cards.forEach(card => observer.observe(card));
+    texts.forEach(text => observer.observe(text));
+    
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollBtn.classList.add('show');
+      } else {
+        scrollBtn.classList.remove('show');
+      }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+  </script>
+</body>
+</html>
