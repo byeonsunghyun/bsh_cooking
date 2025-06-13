@@ -19,7 +19,7 @@ html, body {
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: #fffdfb;
   color: var(--text-color);
   line-height: 1.5; /* 약간 줄임 */
   font-family: 'Nanum Gothic', sans-serif;
@@ -49,9 +49,10 @@ header {
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
+  width: 200px;
+  height: 70px;
   object-fit: contain;
+  margin-top: 7px;
 }
 
 .title {
