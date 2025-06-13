@@ -294,3 +294,11 @@ footer {
   text-decoration: none;
   color: inherit;
 }
+
+nav a img {
+  width: 50px;      /* 원하는 크기로 조절 */
+  height: 50px;
+  vertical-align: middle;  /* 텍스트와 이미지 수직 맞춤 */
+  margin-right: 6px;       /* 텍스트와 간격 */
+}
+
