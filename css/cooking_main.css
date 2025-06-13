@@ -8,6 +8,8 @@
   /* --shadow 제거 (사용 안함) */
 }
 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -149,6 +151,20 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  position: relative;
+}
+
+.rating {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: gold;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .image-wrap img {
@@ -259,6 +275,13 @@ footer {
   footer {
     font-size: 0.7rem;
   }
+  
+  .rating {
+    font-size: 0.7rem;  /* 모바일에선 별 크기 작게 */
+    padding: 1px 4px;
+    top: 6px;
+    right: 6px;
+  }
 }
 
 #scrollToTopBtn {
@@ -301,4 +324,5 @@ nav a img {
   vertical-align: middle;  /* 텍스트와 이미지 수직 맞춤 */
   margin-right: 6px;       /* 텍스트와 간격 */
 }
+
 
