@@ -36,7 +36,7 @@
 .sidebar-login-link {
   position: absolute;
   left: 50%;
-  bottom: 10%;
+  bottom: 100px;
   transform: translateX(-50%);
   font-size: 0.95rem;
   font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
