@@ -21,14 +21,15 @@
 	
 	<button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
 
-	<div class="sidebar" id="sidebar">
-  <nav>
-    <a href="korean_food">한식</a>
-    <a href="western_food">양식</a>
-    <a href="chinese_food">중식</a>
-    <a href="japanese_food">일식</a>
-    <a href="dessert_food">디저트</a>
-  </nav>
+  <div class="sidebar" id="sidebar">
+	  <div class="sidebar-divider"></div>
+	  
+	  <form class="search-container" onsubmit="handleSearch(event)">
+		  <div class="tag-title2">🔍 검색하기</div>
+		  <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+		</form>
+		
+		<a href="login" class="sidebar-login-link">로그인</a>
   </div>
 
 
@@ -273,6 +274,11 @@
           toggleButton.classList.remove('scrolled');
         }
       });
+    
+    function handleSearch(event) {
+        event.preventDefault(); // 제출 막기
+        alert("🔧 검색 기능은 준비 중입니다!");
+      }
     </script>
 </body>
 </html>
