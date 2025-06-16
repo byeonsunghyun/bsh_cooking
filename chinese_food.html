@@ -17,6 +17,19 @@
 	    </div>
 	  </a>
 	</header>
+	
+	<button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+	  <div class="sidebar-divider"></div>
+	  
+	  <form class="search-container" onsubmit="handleSearch(event)">
+		  <div class="tag-title2">🔍 검색하기</div>
+		  <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+		</form>
+		
+		<a href="login" class="sidebar-login-link">로그인</a>
+  </div>
 
     <nav>
   <a href="korean_food"><img src="image/korea_logo.png" alt="한식 아이콘"></a>
@@ -106,7 +119,50 @@
         behavior: 'smooth'
       });
     });
+    
+    const navWrapper = document.querySelector('.nav-wrapper');
+    const nav = navWrapper.querySelector('nav');
+    const leftBtn = navWrapper.querySelector('.nav-arrow.left');
+    const rightBtn = navWrapper.querySelector('.nav-arrow.right');
 
-  </script>
+    function updateNavArrows() {
+      const scrollLeft = nav.scrollLeft;
+      const maxScroll = nav.scrollWidth - nav.clientWidth;
+
+      leftBtn.style.display = scrollLeft > 10 ? 'flex' : 'none';
+      rightBtn.style.display = scrollLeft < maxScroll - 10 ? 'flex' : 'none';
+    }
+
+    leftBtn.addEventListener('click', () => {
+      nav.scrollBy({ left: -100, behavior: 'smooth' });
+    });
+
+    rightBtn.addEventListener('click', () => {
+      nav.scrollBy({ left: 100, behavior: 'smooth' });
+    });
+
+    nav.addEventListener('scroll', updateNavArrows);
+    window.addEventListener('resize', updateNavArrows);
+    window.addEventListener('DOMContentLoaded', updateNavArrows);
+ 	
+    function toggleSidebar() {
+    	  const sidebar = document.getElementById('sidebar');
+    	  sidebar.classList.toggle('open');
+    	}
+
+    window.addEventListener('scroll', function () {
+        const toggleButton = document.querySelector('.sidebar-toggle-button');
+        if (window.scrollY > 10) {
+          toggleButton.classList.add('scrolled');
+        } else {
+          toggleButton.classList.remove('scrolled');
+        }
+      });
+    
+    function handleSearch(event) {
+        event.preventDefault(); // 제출 막기
+        alert("🔧 검색 기능은 준비 중입니다!");
+      }
+    </script>
 </body>
 </html>
