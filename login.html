@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>로그인 | 맛있는 한 끼</title>
+<link rel="icon" href="./image/icon.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
+  }
+  body, html {
+    height: 100%;
+    background-color: #fff9f4;
+    color: #333;
+  }
+  .login-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('./image/bg_pattern.png') repeat;
+    animation: fadeIn 0.7s ease forwards;
+  }
+  .login-box {
+    background-color: #fff;
+    padding: 45px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    width: 360px;
+    text-align: center;
+    border: 1px solid #ffe0b3;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  .header h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #ff7f50;
+    margin-bottom: 10px;
+  }
+  .logo {
+    width: 150px;
+    height: auto;
+  }
+  .login-input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    background-color: #fff9f4;
+    border: 1px solid #ffc89f;
+    border-radius: 8px;
+    color: #333;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  .login-input::placeholder {
+    color: #c7a98b;
+  }
+  .login-input:focus {
+    outline: none;
+    border-color: #ff9857;
+    background-color: #fff2e0;
+  }
+  .login-button {
+    width: 80%;
+    padding: 10px 0;
+    background-color: #ff7f50;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+  }
+  .login-button:hover {
+    background-color: #ff6333;
+    transform: scale(1.03);
+  }
+  .signup-text {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: #7a5e42;
+  }
+  .signup-link {
+    color: #e67e22;
+    margin-left: 6px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .signup-link:hover {
+    color: #d35400;
+  }
+  .login-footer {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #a79d91;
+    text-align: center;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-box">
+      <div class="header">
+        <img src="./image/title_logo.png" alt="Logo" class="logo">
+      </div>
+      <form onsubmit="return handleLogin(event)">
+        <input type="text" class="login-input" placeholder="아이디" required />
+        <input type="password" class="login-input" placeholder="비밀번호" required />
+        <button type="submit" class="login-button">로그인</button>
+      </form>
+      <p class="signup-text">
+        계정이 없으신가요?
+        <a href="#" class="signup-link" onclick="showPreparingMessage(event)">회원가입</a>
+      </p>
+    </div>
+    <div class="login-footer">
+      © 2025. Byeon Sung Hyun. All rights reserved.
+    </div>
+  </div>
+
+<script>
+  function handleLogin(event) {
+    event.preventDefault();
+    alert("존재하지 않는 아이디입니다.");
+    return false;
+  }
+  function showPreparingMessage(event) {
+    event.preventDefault();
+    alert("관리자에게 문의 바랍니다.");
+  }
+</script>
+</body>
+</html>
