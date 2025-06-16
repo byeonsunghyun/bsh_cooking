@@ -8,6 +8,10 @@
   /* --shadow 제거 (사용 안함) */
 }
 
+.tag-title2 {
+    font-size: 1.0rem;
+}
+
 /* 사이드바 (오른쪽에서 나옴) */
 .sidebar {
   position: fixed;
@@ -24,6 +28,66 @@
   flex-direction: column;
 }
 
+.sidebar-divider {
+  border-bottom: 1px solid #ffd8d2;  /* 연한 분홍 경계선 */
+  margin: 45px 16px 10px 16px;
+}
+
+.sidebar-login-link {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
+  color: var(--accent-color);
+  text-decoration: none; /* 밑줄 제거 */
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sidebar-login-link:hover {
+  color: #e85b50;
+}
+
+
+
+/* 검색 영역 전체 폼 */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 10px;
+}
+
+/* "🔍 검색하기" 제목 */
+.tag-title2 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  font-family: 'Gowun Dodum', sans-serif;
+  margin-bottom: 4px;
+}
+
+/* 검색 input 필드 */
+.search-container input[type="text"] {
+  padding: 10px 12px;
+  border: 1px solid #ffd8d2;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: 'Nanum Gothic', sans-serif;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-container input[type="text"]:focus {
+  border-color: var(--accent-color);
+  background-color: #fffaf8;
+}
+
+
+
 /* 사이드바 열린 상태 */
 .sidebar.open {
   right: 0;
@@ -31,8 +95,8 @@
 
 .sidebar-toggle-button {
   position: fixed;
-  top: 32px;
-  right: 32px;
+  top: 35px;
+  right: 35px;
   background: none;         /* 배경 제거 */
   border: none;             /* 테두리 제거 */
   color: var(--accent-color);  /* 아이콘 색상 설정 */
@@ -342,6 +406,10 @@ footer {
 }
 
 @media (max-width: 600px) {
+	.sidebar-divider {
+  margin-top:40px;
+}
+	
   .nav-wrapper {
     margin-bottom: 1rem;
   }
@@ -413,6 +481,11 @@ footer {
     top: 6px;
     right: 6px;
   }
+  
+  .sidebar-toggle-button {
+  top: 32px;
+  right: 32px;  
+}
 }
 
 #scrollToTopBtn {
