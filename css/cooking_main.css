@@ -8,8 +8,130 @@
   /* --shadow 제거 (사용 안함) */
 }
 
+/* 사이드바 (오른쪽에서 나옴) */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* 처음에는 화면 밖에 숨김 */
+  width: 250px;
+  height: 100%;
+  background-color: #fff4f2;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 1100;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 사이드바 열린 상태 */
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar-toggle-button {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  background: none;         /* 배경 제거 */
+  border: none;             /* 테두리 제거 */
+  color: var(--accent-color);  /* 아이콘 색상 설정 */
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1200;
+  padding: 0;
+  line-height: 1;
+  box-shadow: none;    
+  transition: top 0.3s ease;     
+}
+
+.sidebar-toggle-button:hover {
+  color: #e85b50;  /* 호버 시 색상 변경 (선택사항) */
+}
+
+/* ------------------- 네비게이션 래퍼 -------------------- */
+.nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* nav 위로 올라오도록 */
+  background-color: #fff4f2;
+  border-bottom: 1px solid #ffd8d2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  /* flex 관련 속성은 필요없음 */
+}
+
+/* nav는 sticky 제거 */
+.nav-wrapper nav {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox 스크롤 숨김 */
+  -ms-overflow-style: none;  /* IE 10+ 스크롤 숨김 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+  font-weight: bold;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  position: static; /* 기존 position 제거 */
+  box-shadow: none; /* nav에 그림자 제거 */
+  border-top: none;
+  border-bottom: none;
+  background-color: transparent;
+  width: 100%;
+}
+
+.nav-wrapper nav::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera 스크롤 숨김 */
+}
 
 
+/* 네비게이션 링크 */
+.nav-wrapper nav a {
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: var(--text-color);
+  border-right: 1px solid #ffddd8;
+  flex-shrink: 0; /* 크기 줄어들지 않게 */
+  font-size: 0.9rem;
+}
+
+.nav-wrapper nav a:last-child {
+  border-right: none;
+}
+
+.nav-wrapper nav a:hover {
+  background-color: rgba(233, 78, 78, 0.1);
+  color: var(--accent-color);
+}
+
+/* 좌우 스크롤 화살표 버튼 */
+.nav-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 1.5rem;
+  z-index: 1001;
+  cursor: pointer;
+  display: none; /* 기본 숨김 */
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--accent-color);
+}
+
+.nav-arrow.left {
+  left: 0;
+}
+
+.nav-arrow.right {
+  right: 0;
+}
+
+/* 기본 스타일 */
 * {
   margin: 0;
   padding: 0;
@@ -220,6 +342,13 @@ footer {
 }
 
 @media (max-width: 600px) {
+  .nav-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .nav-arrow {
+    display: flex;
+  }
   header {
     padding: 0.4rem 1rem;
   }
@@ -326,5 +455,3 @@ nav a img {
   vertical-align: middle;  /* 텍스트와 이미지 수직 맞춤 */
   margin-right: 6px;       /* 텍스트와 간격 */
 }
-
-
