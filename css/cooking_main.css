@@ -436,6 +436,10 @@ footer {
 }
 
 @media (max-width: 600px) {
+.container{
+		margin-top:0px;
+	}
+	
 	.sidebar-divider {
   margin-top:40px;
 }
