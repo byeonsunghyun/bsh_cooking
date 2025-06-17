@@ -22,13 +22,26 @@
 
   <div class="sidebar" id="sidebar">
 	  <div class="sidebar-divider"></div>
-	  
-	  <form class="search-container" onsubmit="handleSearch(event)">
-		  <div class="tag-title2">🔍 검색하기</div>
-		  <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
-		</form>
-		
-		<a href="login" class="sidebar-login-link">로그인</a>
+
+<form class="search-container" onsubmit="handleSearch(event)">
+  <div class="tag-title2">🔍 검색하기</div>
+  <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+</form>
+
+<!-- 빈 공간을 차지하는 spacer -->
+<div class="spacer"></div>
+
+<a href="login" class="sidebar-login-link">로그인</a>
+<div class="sidebar-divider-below-login"></div>
+<div class="sidebar-social-icons">
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="image/instagram.png" alt="Instagram">
+  </a>
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="image/kakaotalk.png" alt="KakaoTalk">
+  </a>
+</div>
+
   </div>
 
     <nav>
