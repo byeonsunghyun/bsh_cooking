@@ -220,7 +220,6 @@ body {
 }
 
 header {
-  padding: 0.8rem 1rem;
   text-align: center;
   background: linear-gradient(to right, #ffefef, #fff5f5);
   border-bottom: 1px solid #ffd8d2;
@@ -237,10 +236,10 @@ header {
 }
 
 .logo {
-  width: 200px;
-  height: 70px;
+  width: auto;
+  height: 100px;
   object-fit: contain;
-  margin-top: 7px;
+  margin-top: 13px;
 }
 
 .title {
@@ -416,9 +415,6 @@ footer {
 
   .nav-arrow {
     display: flex;
-  }
-  header {
-    padding: 0.4rem 1rem;
   }
   
   .title {
