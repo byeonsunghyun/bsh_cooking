@@ -14,11 +14,10 @@
     font-size: 1.0rem;
 }
 
-/* 사이드바 (오른쪽에서 나옴) */
 .sidebar {
   position: fixed;
   top: 0;
-  right: -250px; /* 처음에는 화면 밖에 숨김 */
+  right: -250px; /* 처음 숨김 */
   width: 250px;
   height: 100%;
   background-color: #fff4f2;
@@ -26,13 +25,21 @@
   transition: right 0.3s ease;
   z-index: 1100;
   padding-top: 60px;
+
   display: flex;
   flex-direction: column;
-  
-   max-height: 100vh;
+  max-height: 100vh;
   overflow-y: auto;
-  overscroll-behavior: contain; /* 스크롤 버벅임 방지 */
-  -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.sidebar .spacer {
+  flex-grow: 1;
+}
+
+/* 사이드바 열린 상태 */
+.sidebar.open {
+  right: 0;
 }
 
 .sidebar-divider {
@@ -48,7 +55,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: color 0.3s ease;
-  margin: 520px auto 50px;
+  margin: 0 auto 20px;
   text-align: center;
   display: block;
 }
@@ -63,12 +70,12 @@
   margin: 12px 16px 16px;
 }
 
-/* ✅ 소셜 아이콘 영역 */
 .sidebar-social-icons {
   display: flex;
   justify-content: center;
   gap: 16px;
   margin-bottom: 20px;
+  margin-top: 0;
 }
 
 /* ✅ 이미지 아이콘 스타일 */
@@ -83,7 +90,8 @@
   opacity: 0.7;
 }
 
-/* 검색 영역 전체 폼 */
+
+/* 기존 요소들 정렬 그대로 유지 */
 .search-container {
   display: flex;
   flex-direction: column;
@@ -117,15 +125,9 @@
 }
 
 
-
-/* 사이드바 열린 상태 */
-.sidebar.open {
-  right: 0;
-}
-
 .sidebar-toggle-button {
   position: fixed;
-  top: 35px;
+  top: 42px;
   right: 35px;
   background: none;         /* 배경 제거 */
   border: none;             /* 테두리 제거 */
@@ -262,7 +264,6 @@ header {
   justify-content: flex-start;
   gap: 0.1rem;
   width: fit-content;
-  margin-left: -20px;
 }
 
 .logo {
@@ -509,7 +510,7 @@ footer {
   }
   
   .sidebar-toggle-button {
-  top: 32px;
+  top: 42px;
   right: 32px;  
 }
 }
