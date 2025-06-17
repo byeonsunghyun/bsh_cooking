@@ -8,6 +8,8 @@
   /* --shadow 제거 (사용 안함) */
 }
 
+
+
 .tag-title2 {
     font-size: 1.0rem;
 }
@@ -26,6 +28,11 @@
   padding-top: 60px;
   display: flex;
   flex-direction: column;
+  
+   max-height: 100vh;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* 스크롤 버벅임 방지 */
+  -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
 }
 
 .sidebar-divider {
@@ -34,24 +41,47 @@
 }
 
 .sidebar-login-link {
-  position: absolute;
-  left: 50%;
-  bottom: 100px;
-  transform: translateX(-50%);
   font-size: 0.95rem;
   font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
   color: var(--accent-color);
-  text-decoration: none; /* 밑줄 제거 */
+  text-decoration: none;
   font-weight: 500;
   cursor: pointer;
   transition: color 0.3s ease;
+  margin: 520px auto 50px;
+  text-align: center;
+  display: block;
 }
 
 .sidebar-login-link:hover {
   color: #e85b50;
 }
 
+/* ✅ 로그인 아래 경계선 */
+.sidebar-divider-below-login {
+  border-bottom: 1px solid #ffd8d2;
+  margin: 12px 16px 16px;
+}
 
+/* ✅ 소셜 아이콘 영역 */
+.sidebar-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* ✅ 이미지 아이콘 스타일 */
+.sidebar-social-icons img {
+  width: 28px;
+  height: 28px;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.sidebar-social-icons img:hover {
+  opacity: 0.7;
+}
 
 /* 검색 영역 전체 폼 */
 .search-container {
