@@ -309,7 +309,7 @@
         alert("🔧 검색 기능은 준비 중입니다!");
       }
 
-	  document.querySelectorAll('.recipe-card').forEach(card => {
+	 document.querySelectorAll('.recipe-card').forEach(card => {
         card.addEventListener('click', () => {
           const href = card.getAttribute('href');
           const img = card.querySelector('img')?.getAttribute('src') || '';
@@ -332,23 +332,23 @@
 
       // 사이드바에 표시
       function loadRecentRecipes() {
-  const container = document.getElementById('recent-recipes-list');
-  if (!container) return;
+        const container = document.getElementById('recent-recipes-list');
+        if (!container) return;
 
-  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-  container.innerHTML = '';
+        const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+        container.innerHTML = '';
 
-  recent.forEach(({ href, img, title }) => {
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <a href="${href}" class="recent-link">
-        <img src="${img}" alt="${title}">
-      </a>
-    `;
-    container.appendChild(li);
-  });
-}
-
+        recent.forEach(({ href, img, title }) => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <a href="${href}" class="recent-link">
+              <img src="${img}" alt="${title}">
+              <span>${title}</span>
+            </a>
+          `;
+          container.appendChild(li);
+        });
+      }
 
       document.addEventListener('DOMContentLoaded', loadRecentRecipes);
     </script>
