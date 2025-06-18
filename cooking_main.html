@@ -28,6 +28,11 @@
   <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
 </form>
 
+	  <div class="recent-recipes">
+  <div class="tag-title2">🧾 최근 본 레시피</div>
+  <ul id="recent-recipes-list"></ul>
+</div>
+
 <!-- 빈 공간을 차지하는 spacer -->
 <div class="spacer"></div>
 
@@ -303,6 +308,49 @@
         event.preventDefault(); // 제출 막기
         alert("🔧 검색 기능은 준비 중입니다!");
       }
+
+	  document.querySelectorAll('.recipe-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const href = card.getAttribute('href');
+          const img = card.querySelector('img')?.getAttribute('src') || '';
+          const title = card.parentElement.querySelector('h3')?.innerText || '';
+
+          const newRecipe = { href, img, title };
+
+          let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+
+          // 중복 제거
+          recent = recent.filter(r => r.href !== href);
+
+          // 최신 순 추가 (최대 5개)
+          recent.unshift(newRecipe);
+          if (recent.length > 10) recent = recent.slice(0, 10);
+
+          localStorage.setItem('recentRecipes', JSON.stringify(recent));
+        });
+      });
+
+      // 사이드바에 표시
+      function loadRecentRecipes() {
+  const container = document.getElementById('recent-recipes-list');
+  if (!container) return;
+
+  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+  container.innerHTML = '';
+
+  recent.forEach(({ href, img, title }) => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="${href}" class="recent-link">
+        <img src="${img}" alt="${title}">
+      </a>
+    `;
+    container.appendChild(li);
+  });
+}
+
+
+      document.addEventListener('DOMContentLoaded', loadRecentRecipes);
     </script>
 </body>
 </html>
