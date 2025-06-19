@@ -17,6 +17,26 @@ body {
   min-height: 100vh;
 }
 
+.tags {
+  margin-top: 10px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.75rem;         /* 본문보다 약간 작고 균형감 있게 */
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  user-select: none;
+  background-color: #f5f5f5;
+  color: #444;
+}
+
+
 /* 메인 콘텐츠 */
 main.recipe-detail {
   max-width: 800px;
@@ -37,7 +57,6 @@ main.recipe-detail {
 .subtitle {
   font-size: 1rem;
   color: #666;
-  margin-bottom: 24px;
   text-align: center;
   font-style: italic;
 }
@@ -46,8 +65,13 @@ main.recipe-detail {
 @media screen and (max-width: 600px) {
   .subtitle {
     max-width: 80%;
-    margin: 0 auto 24px;
+    margin: 0 auto 0px;
     font-size: 0.85rem;
+  }
+  
+  .tag {
+    font-size: 0.68rem;
+    padding: 2px 6px;
   }
 }
 
@@ -137,6 +161,7 @@ footer {
   }
 }
 
+.tags,
 .recipe-detail h1,
 .subtitle,
 .recipe-image,
@@ -149,6 +174,7 @@ footer {
 
 .recipe-detail h1 { animation-delay: 0.1s; }
 .subtitle { animation-delay: 0.2s; }
+.tags { animation-delay: 0.25s; }
 .recipe-image { animation-delay: 0.3s; }
 .recipe-info { animation-delay: 0.4s; }
 .recipe-steps { animation-delay: 0.5s; }
