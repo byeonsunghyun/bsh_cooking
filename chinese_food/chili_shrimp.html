@@ -179,21 +179,15 @@ const cards = document.querySelectorAll('.recipe-card');
 document.querySelectorAll('.recipe-card').forEach(card => {
   card.addEventListener('click', () => {
     const href = card.getAttribute('href');
-    
-    // img 경로가 상대경로인 경우, 절대경로로 변환
     const imgSrc = card.querySelector('img')?.getAttribute('src') || '';
-    const img = new URL(imgSrc, location.origin).href;
-
     const title = card.parentElement.querySelector('h3')?.innerText || '';
+
+    const img = new URL(imgSrc, location.href).href;
 
     const newRecipe = { href, img, title };
 
     let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-
-    // 중복 제거
     recent = recent.filter(r => r.href !== href);
-
-    // 최신 순 추가 (최대 10개)
     recent.unshift(newRecipe);
     if (recent.length > 10) recent = recent.slice(0, 10);
 
