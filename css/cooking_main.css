@@ -485,8 +485,26 @@ footer {
   font-size: 0.9rem;
   border-top: 1px solid #f2dcd7;
 }
+.mobile-br {
+  display: none; /* 기본은 inline(안 보임) */
+}
+
+.no-recent {
+  font-size: 0.9rem;
+  color: #999;
+  text-align: center;
+  padding: 12px 0;
+}
 
 @media (max-width: 600px) {
+	.mobile-br {
+    display: block; /* 모바일에서 줄바꿈 역할 */
+    content: "";
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+	
 .container{
 		margin-top:0px;
 	}
@@ -568,6 +586,53 @@ footer {
   top: 42px;
   right: 32px;  
 }
+
+.search-container {
+    padding: 12px 10px;
+  }
+
+  .search-container input[type="text"] {
+    font-size: 0.85rem; /* 기본 0.95rem에서 더 작게 조절 */
+    padding: 8px 10px;
+  }
+
+  .recent-recipes {
+    padding: 12px 10px;
+  }
+
+  #recent-recipes-list {
+    max-height: 100px;
+    padding: 8px;
+  }
+
+  #recent-recipes-list li {
+    margin-bottom: 8px;
+  }
+
+  .recent-link {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .recent-link img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .sidebar-login-link {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .sidebar-social-icons {
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+
+  .sidebar-social-icons img {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 #scrollToTopBtn {
