@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 
 :root {
   --bg-color: #ffffff;
@@ -6,6 +8,18 @@
   --accent-color: #e94e4e; /* 좀 더 모던한 레드 */
   --card-bg: #fffdfd;
   /* --shadow 제거 (사용 안함) */
+}
+
+#recent-recipes-list .recent-link:hover {
+  background-color: #ffecec; /* 아주 연한 살구빛 핑크 */
+  color: #d64545; /* 조금 차분한 진한 빨강 */
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#recent-recipes-list .recent-link:hover img {
+  filter: brightness(1);
+  transition: none;
 }
 
 .recent-recipes {
@@ -447,16 +461,19 @@ nav a:hover {
 }
 
 .recipe-text h3 {
+  font-family: 'Jalnan', sans-serif;
+  /* 기존 스타일 유지하면서 폰트만 변경 */
   margin-bottom: 0.5rem;
   font-size: 1.0rem;
-  color: var(--accent-color);
-  font-weight: 700;
+  color: #111111;
+  font-weight: 400;  /* 굵기 적당히 약하게 */
   letter-spacing: 0.02em;
 }
 
+
 .recipe-text p {
-  font-size: 0.8rem;
-  color: #555;
+  font-size: 0.7rem;
+  color: #777777;
   letter-spacing: 0.02em;
 }
 
@@ -528,12 +545,12 @@ footer {
   }
 
   .recipe-text h3 {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     margin-bottom: 0.25rem;
   }
 
   .recipe-text p {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 
   footer {
