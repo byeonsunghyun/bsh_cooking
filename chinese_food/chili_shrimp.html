@@ -116,26 +116,26 @@
     alert("🔧 검색 기능은 준비 중입니다!");
   }
 
-  // ✅ GitHub Pages에서도 이미지 경로가 깨지지 않도록 절대경로 처리
   document.querySelectorAll('.recipe-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const hrefRaw = card.getAttribute('href');
-      const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
-      const title = card.parentElement.querySelector('h3')?.innerText || '';
+  card.addEventListener('click', () => {
+    const hrefRaw = card.getAttribute('href');
+    const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+    const title = card.parentElement.querySelector('h3')?.innerText || '';
 
-      const href = new URL(hrefRaw, location.href).href;
-      const img = new URL(imgRaw, location.href).href;
+    // 🔥 절대 경로 변환
+    const href = new URL(hrefRaw, location.href).href;
+    const img = new URL(imgRaw, location.href).href;
 
-      const newRecipe = { href, img, title };
+    const newRecipe = { href, img, title };
 
-      let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-      recent = recent.filter(r => r.href !== href);
-      recent.unshift(newRecipe);
-      if (recent.length > 10) recent = recent.slice(0, 10);
+    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    recent = recent.filter(r => r.href !== href);
+    recent.unshift(newRecipe);
+    if (recent.length > 10) recent = recent.slice(0, 10);
 
-      localStorage.setItem('recentRecipes', JSON.stringify(recent));
-    });
+    localStorage.setItem('recentRecipes', JSON.stringify(recent));
   });
+});
 
   function loadRecentRecipes() {
     const container = document.getElementById('recent-recipes-list');
