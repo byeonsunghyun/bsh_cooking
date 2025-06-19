@@ -17,9 +17,44 @@
     </a>
   </header>
 
+	<button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+	  <div class="sidebar-divider"></div>
+
+<form class="search-container" onsubmit="handleSearch(event)">
+  <div class="tag-title2">🔍 검색하기</div>
+  <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+</form>
+
+	  <div class="recent-recipes">
+  <div class="tag-title2">🕘 최근 본 레시피</div>
+  <ul id="recent-recipes-list"></ul>
+</div>
+
+<!-- 빈 공간을 차지하는 spacer -->
+<div class="spacer"></div>
+
+<a href="../login" class="sidebar-login-link">로그인</a>
+<div class="sidebar-divider-below-login"></div>
+<div class="sidebar-social-icons">
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="../image/instagram.png" alt="Instagram">
+  </a>
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="../image/kakaotalk.png" alt="KakaoTalk">
+  </a>
+</div>
+
+  </div>
+
   <main class="recipe-detail">
     <h1 style="text-align:center;">- 치킨무 깍두기 -</h1>
     <p class="subtitle">아삭하고 시원한 입가심 무 반찬!</p>
+	   <div class="tags" style="justify-content: center; margin-bottom: 24px;">
+	  <span class="tag time">5분 이내</span>
+	  <span class="tag sour">새콤한</span>
+	</div>
 
     <div class="recipe-image">
       <img src="../image/cube_kimchi.jpg" alt="치킨무 깍두기" />
@@ -55,5 +90,95 @@
   <footer>
     <p>&copy; 2025 Byeon Sung Hyun. All rights reserved.</p>
   </footer>
+
+	<button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
+
+<script>
+const scrollBtn = document.getElementById('scrollToTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('show');
+    } else {
+      scrollBtn.classList.remove('show');
+    }
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+	
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+  }
+
+  window.addEventListener('scroll', function () {
+    const toggleButton = document.querySelector('.sidebar-toggle-button');
+    if (window.scrollY > 10) {
+      toggleButton.classList.add('scrolled');
+    } else {
+      toggleButton.classList.remove('scrolled');
+    }
+  });
+
+  function handleSearch(event) {
+    event.preventDefault();
+    alert("🔧 검색 기능은 준비 중입니다!");
+  }
+
+ const basePath = '/bsh_cooking/'; // 깃허브 저장소 루트 경로
+
+document.querySelectorAll('.recipe-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const hrefRaw = card.getAttribute('href');
+    const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+    const title = card.parentElement.querySelector('h3')?.innerText || '';
+
+    // 저장할 때는 원본 경로 그대로 저장
+    const newRecipe = { href: hrefRaw, img: imgRaw, title };
+
+    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    recent = recent.filter(r => r.href !== hrefRaw);
+    recent.unshift(newRecipe);
+    if (recent.length > 10) recent = recent.slice(0, 10);
+
+    localStorage.setItem('recentRecipes', JSON.stringify(recent));
+  });
+});
+
+function loadRecentRecipes() {
+  const container = document.getElementById('recent-recipes-list');
+  if (!container) return;
+
+  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+  container.innerHTML = '';
+
+  if (recent.length === 0) {
+    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+    return;
+  }
+
+  recent.forEach(({ href, img, title }) => {
+    // img가 상대경로일 경우 기준 경로(basePath)와 합쳐서 절대경로 만듦
+    const imgUrl = img.startsWith('http') ? img : basePath + img.replace(/^(\.\.\/)+/, '');
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="${href}" class="recent-link">
+        <img src="${imgUrl}" alt="${title}">
+        <span>${title}</span>
+      </a>
+    `;
+    container.appendChild(li);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+
+</script>
 </body>
 </html>
