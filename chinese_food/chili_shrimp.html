@@ -97,132 +97,73 @@
 	<button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
 
 	<script>
-const cards = document.querySelectorAll('.recipe-card');
-    const texts = document.querySelectorAll('.recipe-text');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, {
-      threshold: 0.2
-    });
-
-    cards.forEach(card => observer.observe(card));
-    texts.forEach(text => observer.observe(text));
-    
-    const scrollBtn = document.getElementById('scrollToTopBtn');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        scrollBtn.classList.add('show');
-      } else {
-        scrollBtn.classList.remove('show');
-      }
-    });
-
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    const navWrapper = document.querySelector('.nav-wrapper');
-    const nav = navWrapper.querySelector('nav');
-    const leftBtn = navWrapper.querySelector('.nav-arrow.left');
-    const rightBtn = navWrapper.querySelector('.nav-arrow.right');
-
-    function updateNavArrows() {
-      const scrollLeft = nav.scrollLeft;
-      const maxScroll = nav.scrollWidth - nav.clientWidth;
-
-      leftBtn.style.display = scrollLeft > 10 ? 'flex' : 'none';
-      rightBtn.style.display = scrollLeft < maxScroll - 10 ? 'flex' : 'none';
-    }
-
-    leftBtn.addEventListener('click', () => {
-      nav.scrollBy({ left: -100, behavior: 'smooth' });
-    });
-
-    rightBtn.addEventListener('click', () => {
-      nav.scrollBy({ left: 100, behavior: 'smooth' });
-    });
-
-    nav.addEventListener('scroll', updateNavArrows);
-    window.addEventListener('resize', updateNavArrows);
-    window.addEventListener('DOMContentLoaded', updateNavArrows);
- 	
-    function toggleSidebar() {
-    	  const sidebar = document.getElementById('sidebar');
-    	  sidebar.classList.toggle('open');
-    	}
-
-    window.addEventListener('scroll', function () {
-        const toggleButton = document.querySelector('.sidebar-toggle-button');
-        if (window.scrollY > 10) {
-          toggleButton.classList.add('scrolled');
-        } else {
-          toggleButton.classList.remove('scrolled');
-        }
-      });
-    
-    function handleSearch(event) {
-        event.preventDefault(); // 제출 막기
-        alert("🔧 검색 기능은 준비 중입니다!");
-      }
-		
-  const repoName = 'bsh_cooking'; // ← 여기에 본인 GitHub 레포 이름 입력
-
-document.querySelectorAll('.recipe-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const href = card.getAttribute('href');
-    const imgSrc = card.querySelector('img')?.getAttribute('src') || '';
-    const title = card.parentElement.querySelector('h3')?.innerText || '';
-
-    const img = new URL(imgSrc, location.href).href;
-
-    const newRecipe = { href, img, title };
-
-    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-    recent = recent.filter(r => r.href !== href);
-    recent.unshift(newRecipe);
-    if (recent.length > 10) recent = recent.slice(0, 10);
-
-    localStorage.setItem('recentRecipes', JSON.stringify(recent));
-  });
-});
-
-function loadRecentRecipes() {
-  const container = document.getElementById('recent-recipes-list');
-  if (!container) return;
-
-  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-  container.innerHTML = '';
-
-  if (recent.length === 0) {
-    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
-    return;
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
   }
 
-  recent.forEach(({ href, img, title }) => {
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <a href="${href}" class="recent-link">
-        <img src="${img}" alt="${title}">
-        <span>${title}</span>
-      </a>
-    `;
-    container.appendChild(li);
+  window.addEventListener('scroll', function () {
+    const toggleButton = document.querySelector('.sidebar-toggle-button');
+    if (window.scrollY > 10) {
+      toggleButton.classList.add('scrolled');
+    } else {
+      toggleButton.classList.remove('scrolled');
+    }
   });
-}
 
-document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+  function handleSearch(event) {
+    event.preventDefault();
+    alert("🔧 검색 기능은 준비 중입니다!");
+  }
 
+  // ✅ GitHub Pages에서도 이미지 경로가 깨지지 않도록 절대경로 처리
+  document.querySelectorAll('.recipe-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const hrefRaw = card.getAttribute('href');
+      const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+      const title = card.parentElement.querySelector('h3')?.innerText || '';
 
+      const href = new URL(hrefRaw, location.href).href;
+      const img = new URL(imgRaw, location.href).href;
+
+      const newRecipe = { href, img, title };
+
+      let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+      recent = recent.filter(r => r.href !== href);
+      recent.unshift(newRecipe);
+      if (recent.length > 10) recent = recent.slice(0, 10);
+
+      localStorage.setItem('recentRecipes', JSON.stringify(recent));
+    });
+  });
+
+  function loadRecentRecipes() {
+    const container = document.getElementById('recent-recipes-list');
+    if (!container) return;
+
+    const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    container.innerHTML = '';
+
+    if (recent.length === 0) {
+      container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+      return;
+    }
+
+    recent.forEach(({ href, img, title }) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <a href="${href}" class="recent-link">
+          <img src="${img}" alt="${title}">
+          <span>${title}</span>
+        </a>
+      `;
+      container.appendChild(li);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadRecentRecipes);
 </script>
+
 
 </body>
 </html>
