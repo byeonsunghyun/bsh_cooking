@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
-
 :root {
   --bg-color: #ffffff;
   --text-color: #111111;
@@ -9,6 +8,79 @@
   --card-bg: #fffdfd;
   /* --shadow 제거 (사용 안함) */
 }
+
+.chili-icon {
+  width: 9px;
+  height: 18px;
+  margin-left: 2px;
+  vertical-align: middle; /* 텍스트랑 세로 정렬 */
+}
+
+
+.tags {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.7rem;
+  background-color: #d5bfa333;  /* 따뜻한 베이지 */
+color: #a67c52;
+
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.tag.spicy {
+  background-color: #f8d7da;
+  color: #c0392b;
+}
+
+.tag.sweet {
+  background-color: #fce5cd;
+  color: #e67e22;
+}
+
+.tag.salty {
+  background-color: #e2e3e5;
+  color: #2c3e50;
+}
+
+.tag.sour {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+.tag.light {
+  background-color: #f0fae4;
+  color: #66bb6a;
+}
+
+.tag.nutty {
+  background-color: #f4e2d8;
+  color: #4e342e;
+}
+
+.tag.oily {
+  background-color: #fdebd0;
+  color: #d35400;
+}
+
+.tag.rich {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+.tag.hot {
+  background-color: #ffe5e0;  /* 맑은 붉은 느낌의 배경 */
+  color: #d62828;             /* 불맛/얼큰한 느낌의 붉은색 */
+}
+
 
 #recent-recipes-list .recent-link:hover {
   background-color: #ffecec; /* 아주 연한 살구빛 핑크 */
@@ -387,7 +459,6 @@ nav a:hover {
 .recipe-card {
   background-color: var(--card-bg);
   border-radius: 12px;
-  border: 1px solid #f1f1f1;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -497,6 +568,11 @@ footer {
 }
 
 @media (max-width: 600px) {
+	.tag {
+    font-size: 0.6rem;
+    padding: 2px 5px;
+  }
+	
 	.mobile-br {
     display: block; /* 모바일에서 줄바꿈 역할 */
     content: "";
