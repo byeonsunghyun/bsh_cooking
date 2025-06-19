@@ -116,55 +116,55 @@
     alert("🔧 검색 기능은 준비 중입니다!");
   }
 
-  document.querySelectorAll('.recipe-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const hrefRaw = card.getAttribute('href');
-      const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
-      const title = card.parentElement.querySelector('h3')?.innerText || '';
+ const basePath = '/bsh_cooking/'; // 깃허브 저장소 루트 경로
 
-      // 현재 페이지 경로
-      const currentPath = window.location.pathname;
+document.querySelectorAll('.recipe-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const hrefRaw = card.getAttribute('href');
+    const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+    const title = card.parentElement.querySelector('h3')?.innerText || '';
 
-      // href, img를 현재 경로 기준 절대경로로 변환
-      const href = new URL(hrefRaw, window.location.origin + currentPath).pathname;
-      const img = new URL(imgRaw, window.location.origin + currentPath).pathname;
+    // 저장할 때는 원본 경로 그대로 저장
+    const newRecipe = { href: hrefRaw, img: imgRaw, title };
 
-      const newRecipe = { href, img, title };
+    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    recent = recent.filter(r => r.href !== hrefRaw);
+    recent.unshift(newRecipe);
+    if (recent.length > 10) recent = recent.slice(0, 10);
 
-      let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-      recent = recent.filter(r => r.href !== href);
-      recent.unshift(newRecipe);
-      if (recent.length > 10) recent = recent.slice(0, 10);
-
-      localStorage.setItem('recentRecipes', JSON.stringify(recent));
-    });
+    localStorage.setItem('recentRecipes', JSON.stringify(recent));
   });
+});
 
-  function loadRecentRecipes() {
-    const container = document.getElementById('recent-recipes-list');
-    if (!container) return;
+function loadRecentRecipes() {
+  const container = document.getElementById('recent-recipes-list');
+  if (!container) return;
 
-    const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-    container.innerHTML = '';
+  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+  container.innerHTML = '';
 
-    if (recent.length === 0) {
-      container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
-      return;
-    }
-
-    recent.forEach(({ href, img, title }) => {
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <a href="${href}" class="recent-link">
-          <img src="${img}" alt="${title}">
-          <span>${title}</span>
-        </a>
-      `;
-      container.appendChild(li);
-    });
+  if (recent.length === 0) {
+    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+    return;
   }
 
-  document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+  recent.forEach(({ href, img, title }) => {
+    // img가 상대경로일 경우 기준 경로(basePath)와 합쳐서 절대경로 만듦
+    const imgUrl = img.startsWith('http') ? img : basePath + img.replace(/^(\.\.\/)+/, '');
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="${href}" class="recent-link">
+        <img src="${imgUrl}" alt="${title}">
+        <span>${title}</span>
+      </a>
+    `;
+    container.appendChild(li);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+
 </script>
 
 
