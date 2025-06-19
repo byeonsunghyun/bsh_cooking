@@ -116,7 +116,7 @@
     alert("🔧 검색 기능은 준비 중입니다!");
   }
 
-  const basePath = '/bsh_cooking/';
+ const basePath = '/bsh_cooking/'; // 깃허브 리포지토리명
 
 document.querySelectorAll('.recipe-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -124,13 +124,13 @@ document.querySelectorAll('.recipe-card').forEach(card => {
     const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
     const title = card.parentElement.querySelector('h3')?.innerText || '';
 
-    const href = new URL(hrefRaw, location.origin + basePath).href;
-    const img = new URL(imgRaw, location.origin + basePath).href;
+    // 이미지 경로 절대경로로 변환
+    let img = imgRaw.startsWith('http') ? imgRaw : basePath + imgRaw.replace(/^(\.\.\/)+/, '');
 
-    const newRecipe = { href, img, title };
+    const newRecipe = { href: hrefRaw, img, title };
 
     let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
-    recent = recent.filter(r => r.href !== href);
+    recent = recent.filter(r => r.href !== hrefRaw);
     recent.unshift(newRecipe);
     if (recent.length > 10) recent = recent.slice(0, 10);
 
