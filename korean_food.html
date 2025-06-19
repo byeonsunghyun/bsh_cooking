@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>한식 | 뭉치의 요리 레시피</title>
+  <title>뭉치의 요리 레시피</title>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
   <link rel="icon" href="./image/icon.png" type="image/png">
   <link rel="stylesheet" href="css/cooking_main.css">
@@ -17,8 +17,8 @@
 	    </div>
 	  </a>
 	</header>
-
-    <button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
+	
+	<button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
 
   <div class="sidebar" id="sidebar">
 	  <div class="sidebar-divider"></div>
@@ -27,6 +27,11 @@
   <div class="tag-title2">🔍 검색하기</div>
   <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
 </form>
+
+	  <div class="recent-recipes">
+  <div class="tag-title2">🕘 최근 본 레시피</div>
+  <ul id="recent-recipes-list"></ul>
+</div>
 
 <!-- 빈 공간을 차지하는 spacer -->
 <div class="spacer"></div>
@@ -44,7 +49,7 @@
 
   </div>
 
-   <div class="nav-wrapper">
+    <div class="nav-wrapper">
   <nav>
     <a href="korean_food"><img src="image/korea_logo.png" alt="한식 아이콘"></a>
     <a href="western_food"><img src="image/western_logo.png" alt="양식 아이콘"></a>
@@ -66,12 +71,16 @@
       </div>
     </a>
     <div class="recipe-text">
-      <h3>비빔국수</h3>
+      <h3>비빔국수 🌶️</h3>
       <p>입맛 확 살려주는 매콤새콤한 한입!</p>
+      <div class="tags">
+	    <span class="tag time">15분 이내</span>
+	    <span class="tag spicy">매콤한</span>
+	  </div>
     </div>
   </div>
-    
-    <div class="recipe-wrapper">
+
+	    <div class="recipe-wrapper">
     <a href="/bsh_cooking/korean_food/sundubu" class="recipe-card">
       <div class="image-wrap">
         <img src="./image/sundubu.jpg" alt="순두부찌개" />
@@ -79,7 +88,12 @@
     </a>
     <div class="recipe-text">
       <h3>순두부찌개</h3>
-      <p>부드러움 속에 매콤한 깊이, 따뜻한 한 그릇!</p>
+      <p>부드러움 속에 매콤한 깊이,<span class="mobile-br"></span>
+      따뜻한 한 그릇!</p>
+      <div class="tags">
+	    <span class="tag time">25분 이내</span>
+	    <span class="tag hot">얼큰한</span>
+	  </div>
     </div>
   </div>
     
@@ -91,23 +105,16 @@
     </a>
     <div class="recipe-text">
       <h3>닭곰탕</h3>
-      <p>속을 따뜻하게 채워주는 깊고 진한 닭곰탕!</p>
+      <p>속을 따뜻하게 채워주는<span class="mobile-br"></span>
+      깊고 진한 닭곰탕!</p>
+      <div class="tags">
+	    <span class="tag time">1시간10분 이내</span>
+	    <span class="tag rich">진한</span>
+	  </div>
     </div>
   </div>
-  
-  <div class="recipe-wrapper">
-    <a href="/bsh_cooking/korean_food/stir_fried" class="recipe-card">
-      <div class="image-wrap">
-        <img src="./image/stir_fried.jpg" alt="진미채볶음" />
-      </div>
-    </a>
-    <div class="recipe-text">
-      <h3>진미채볶음</h3>
-      <p>할머니도 좋아하셨던 반찬!</p>
-    </div>
-  </div>
-  
-  <div class="recipe-wrapper">
+
+	    <div class="recipe-wrapper">
     <a href="/bsh_cooking/korean_food/seaweed" class="recipe-card">
       <div class="image-wrap">
         <img src="./image/seaweed.jpg" alt="미역국" />
@@ -116,8 +123,30 @@
     <div class="recipe-text">
       <h3>미역국</h3>
       <p>바다의 향을 담은 건강 한 끼!</p>
+      <div class="tags">
+	    <span class="tag time">20분 이내</span>
+	    <span class="tag light">담백한</span>
+	  </div>
     </div>
   </div>
+
+
+	    <div class="recipe-wrapper">
+    <a href="/bsh_cooking/korean_food/stir_fried" class="recipe-card">
+      <div class="image-wrap">
+        <img src="./image/stir_fried.jpg" alt="진미채볶음" />
+      </div>
+    </a>
+    <div class="recipe-text">
+      <h3>진미채볶음</h3>
+      <p>할머니도 좋아하셨던 반찬!</p>
+      <div class="tags">
+	    <span class="tag time">15분 이내</span>
+	    <span class="tag sweet">달콤한</span>
+	  </div>
+    </div>
+  </div>
+
 
   <div class="recipe-wrapper">
     <a href="/bsh_cooking/korean_food/sausage" class="recipe-card">
@@ -128,6 +157,10 @@
     <div class="recipe-text">
       <h3>소세지볶음</h3>
       <p>케첩 풍미 가득한 밥도둑!</p>
+      <div class="tags">
+	    <span class="tag time">5분 이내</span>
+	    <span class="tag sweet">달콤한</span>
+	  </div>
     </div>
   </div>
 
@@ -140,8 +173,13 @@
     <div class="recipe-text">
       <h3>치킨무 깍두기</h3>
       <p>아삭하고 시원한 입가심 무 반찬!</p>
+      <div class="tags">
+	    <span class="tag time">5분 이내</span>
+	    <span class="tag sour">새콤한</span>
+	  </div>
     </div>
   </div>
+
 
 </div>
 
@@ -152,7 +190,7 @@
     
   </div>
 
-   <script>
+  <script>
     const cards = document.querySelectorAll('.recipe-card');
     const texts = document.querySelectorAll('.recipe-text');
     
@@ -229,6 +267,74 @@
         event.preventDefault(); // 제출 막기
         alert("🔧 검색 기능은 준비 중입니다!");
       }
+
+	 document.querySelectorAll('.recipe-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const href = card.getAttribute('href');
+          const img = card.querySelector('img')?.getAttribute('src') || '';
+          const title = card.parentElement.querySelector('h3')?.innerText || '';
+
+          const newRecipe = { href, img, title };
+
+          let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+
+          // 중복 제거
+          recent = recent.filter(r => r.href !== href);
+
+          // 최신 순 추가 (최대 5개)
+          recent.unshift(newRecipe);
+          if (recent.length > 10) recent = recent.slice(0, 10);
+
+          localStorage.setItem('recentRecipes', JSON.stringify(recent));
+        });
+      });
+
+      // 사이드바에 표시
+      function loadRecentRecipes() {
+        const container = document.getElementById('recent-recipes-list');
+        if (!container) return;
+
+        const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+        container.innerHTML = '';
+
+        recent.forEach(({ href, img, title }) => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <a href="${href}" class="recent-link">
+              <img src="${img}" alt="${title}">
+              <span>${title}</span>
+            </a>
+          `;
+          container.appendChild(li);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+      
+      function loadRecentRecipes() {
+    	  const container = document.getElementById('recent-recipes-list');
+    	  if (!container) return;
+
+    	  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    	  container.innerHTML = '';
+
+    	  if (recent.length === 0) {
+    	    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+    	    return;
+    	  }
+
+    	  recent.forEach(({ href, img, title }) => {
+    	    const li = document.createElement('li');
+    	    li.innerHTML = `
+    	      <a href="${href}" class="recent-link">
+    	        <img src="${img}" alt="${title}">
+    	        <span>${title}</span>
+    	      </a>
+    	    `;
+    	    container.appendChild(li);
+    	  });
+    	}
+      
     </script>
 </body>
 </html>
