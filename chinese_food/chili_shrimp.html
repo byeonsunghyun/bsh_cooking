@@ -96,7 +96,7 @@
 
 	<button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
 
-	<script>
+<script>
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('open');
@@ -116,24 +116,18 @@
     alert("🔧 검색 기능은 준비 중입니다!");
   }
 
-  const basePath = '/bsh_cooking/'; // 리포지토리명 반드시 맞춰야 함
-
   document.querySelectorAll('.recipe-card').forEach(card => {
     card.addEventListener('click', () => {
       const hrefRaw = card.getAttribute('href');
       const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
       const title = card.parentElement.querySelector('h3')?.innerText || '';
 
-      // 디버깅 로그
-      console.log('원본 href:', hrefRaw);
-      console.log('원본 이미지 경로:', imgRaw);
+      // 현재 페이지 경로
+      const currentPath = window.location.pathname;
 
-      // 절대 경로로 변환
-      const href = hrefRaw.startsWith('http') ? hrefRaw : basePath + hrefRaw.replace(/^(\.\.\/)+/, '');
-      const img = imgRaw.startsWith('http') ? imgRaw : basePath + imgRaw.replace(/^(\.\.\/)+/, '');
-
-      console.log('변환된 href:', href);
-      console.log('변환된 이미지 경로:', img);
+      // href, img를 현재 경로 기준 절대경로로 변환
+      const href = new URL(hrefRaw, window.location.origin + currentPath).pathname;
+      const img = new URL(imgRaw, window.location.origin + currentPath).pathname;
 
       const newRecipe = { href, img, title };
 
@@ -159,9 +153,6 @@
     }
 
     recent.forEach(({ href, img, title }) => {
-      // 이미지 경로가 잘못됐는지 체크하고, 절대경로 하드코딩 시도 (필요시)
-      // const imgSrc = img.startsWith('http') ? img : basePath + img;
-
       const li = document.createElement('li');
       li.innerHTML = `
         <a href="${href}" class="recent-link">
@@ -175,6 +166,7 @@
 
   document.addEventListener('DOMContentLoaded', loadRecentRecipes);
 </script>
+
 
 
 
