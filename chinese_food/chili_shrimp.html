@@ -116,15 +116,16 @@
     alert("🔧 검색 기능은 준비 중입니다!");
   }
 
-  document.querySelectorAll('.recipe-card').forEach(card => {
+  const basePath = '/bsh_cooking/';
+
+document.querySelectorAll('.recipe-card').forEach(card => {
   card.addEventListener('click', () => {
     const hrefRaw = card.getAttribute('href');
     const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
     const title = card.parentElement.querySelector('h3')?.innerText || '';
 
-    // 🔥 절대 경로 변환
-    const href = new URL(hrefRaw, location.href).href;
-    const img = new URL(imgRaw, location.href).href;
+    const href = new URL(hrefRaw, location.origin + basePath).href;
+    const img = new URL(imgRaw, location.origin + basePath).href;
 
     const newRecipe = { href, img, title };
 
@@ -136,6 +137,7 @@
     localStorage.setItem('recentRecipes', JSON.stringify(recent));
   });
 });
+
 
   function loadRecentRecipes() {
     const container = document.getElementById('recent-recipes-list');
