@@ -17,10 +17,45 @@
     </a>
   </header>
 
+	<button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+	  <div class="sidebar-divider"></div>
+
+<form class="search-container" onsubmit="handleSearch(event)">
+  <div class="tag-title2">🔍 검색하기</div>
+  <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+</form>
+
+	  <div class="recent-recipes">
+  <div class="tag-title2">🕘 최근 본 레시피</div>
+  <ul id="recent-recipes-list"></ul>
+</div>
+
+<!-- 빈 공간을 차지하는 spacer -->
+<div class="spacer"></div>
+
+<a href="login" class="sidebar-login-link">로그인</a>
+<div class="sidebar-divider-below-login"></div>
+<div class="sidebar-social-icons">
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="image/instagram.png" alt="Instagram">
+  </a>
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="image/kakaotalk.png" alt="KakaoTalk">
+  </a>
+</div>
+
+  </div>
+
   <main class="recipe-detail">
     <h1 style="text-align:center;">- 칠리새우 -</h1>
     <p class="subtitle">달콤하면서도 매콤한 맛이 매력적인 칠리새우</p>
-
+    <div class="tags" style="justify-content: center; margin-bottom: 24px;">
+	  <span class="tag time">10분 이내</span>
+	  <span class="tag sweet">달콤한</span>
+	</div>
+	  
     <div class="recipe-image">
       <img src="../image/chili_shrimp.jpg" alt="칠리새우" />
     </div>
@@ -58,5 +93,93 @@
   <footer>
     <p>&copy; 2025 Byeon Sung Hyun. All rights reserved.</p>
   </footer>
+
+	<script>
+  function toggleSidebar() {
+	  const sidebar = document.getElementById('sidebar');
+	  sidebar.classList.toggle('open');
+	}
+
+window.addEventListener('scroll', function () {
+    const toggleButton = document.querySelector('.sidebar-toggle-button');
+    if (window.scrollY > 10) {
+      toggleButton.classList.add('scrolled');
+    } else {
+      toggleButton.classList.remove('scrolled');
+    }
+  });
+
+function handleSearch(event) {
+    event.preventDefault(); // 제출 막기
+    alert("🔧 검색 기능은 준비 중입니다!");
+  }
+
+ document.querySelectorAll('.recipe-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const href = card.getAttribute('href');
+      const img = card.querySelector('img')?.getAttribute('src') || '';
+      const title = card.parentElement.querySelector('h3')?.innerText || '';
+
+      const newRecipe = { href, img, title };
+
+      let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+
+      // 중복 제거
+      recent = recent.filter(r => r.href !== href);
+
+      // 최신 순 추가 (최대 5개)
+      recent.unshift(newRecipe);
+      if (recent.length > 10) recent = recent.slice(0, 10);
+
+      localStorage.setItem('recentRecipes', JSON.stringify(recent));
+    });
+  });
+
+  // 사이드바에 표시
+  function loadRecentRecipes() {
+    const container = document.getElementById('recent-recipes-list');
+    if (!container) return;
+
+    const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    container.innerHTML = '';
+
+    recent.forEach(({ href, img, title }) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <a href="${href}" class="recent-link">
+          <img src="${img}" alt="${title}">
+          <span>${title}</span>
+        </a>
+      `;
+      container.appendChild(li);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+  
+  function loadRecentRecipes() {
+	  const container = document.getElementById('recent-recipes-list');
+	  if (!container) return;
+
+	  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+	  container.innerHTML = '';
+
+	  if (recent.length === 0) {
+	    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+	    return;
+	  }
+
+	  recent.forEach(({ href, img, title }) => {
+	    const li = document.createElement('li');
+	    li.innerHTML = `
+	      <a href="${href}" class="recent-link">
+	        <img src="${img}" alt="${title}">
+	        <span>${title}</span>
+	      </a>
+	    `;
+	    container.appendChild(li);
+	  });
+	}
+  </script>
 </body>
 </html>
