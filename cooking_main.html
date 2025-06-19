@@ -96,7 +96,8 @@
     </a>
     <div class="recipe-text">
       <h3>순두부찌개</h3>
-      <p>부드러움 속에 매콤한 깊이, 따뜻한 한 그릇!</p>
+      <p>부드러움 속에 매콤한 깊이,<span class="mobile-br"></span>
+      따뜻한 한 그릇!</p>
     </div>
   </div>
 
@@ -108,7 +109,8 @@
     </a>
     <div class="recipe-text">
       <h3>칠리새우</h3>
-      <p>달콤하면서도 매콤한 맛이 매력적인 칠리새우!</p>
+      <p>달콤하면서도 매콤한 맛이<span class="mobile-br"></span>
+      매력적인 칠리새우!</p>
     </div>
   </div>
 
@@ -120,7 +122,8 @@
     </a>
     <div class="recipe-text">
       <h3>봉골래 파스타</h3>
-      <p>화이트와인 향에 칼칼함을 더한 파스타!</p>
+      <p>화이트와인 향에<span class="mobile-br"></span>
+     칼칼함을 더한 파스타!</p>
     </div>
   </div>
     
@@ -132,7 +135,8 @@
     </a>
     <div class="recipe-text">
       <h3>닭곰탕</h3>
-      <p>속을 따뜻하게 채워주는 깊고 진한 닭곰탕!</p>
+      <p>속을 따뜻하게 채워주는<span class="mobile-br"></span>
+      깊고 진한 닭곰탕!</p>
     </div>
   </div>
 
@@ -169,7 +173,8 @@
     </a>
     <div class="recipe-text">
       <h3>토마토 새우 스파게티</h3>
-      <p>탱글한 새우와 상큼한 토마토 소스의 조화!</p>
+      <p>탱글한 새우와<span class="mobile-br"></span>
+      상큼한 토마토 소스의 조화!</p>
     </div>
   </div>
 
@@ -194,7 +199,7 @@
     </a>
     <div class="recipe-text">
       <h3>맛계란</h3>
-      <p>밥도둑 짭조름한 반숙 계란 간장조림!</p>
+      <p>짭조름한 반숙 계란 간장조림!</p>
     </div>
   </div>
 
@@ -218,7 +223,8 @@
     </a>
     <div class="recipe-text">
       <h3>토마토 계란 밥</h3>
-      <p>부드러운 계란과 토마토가 어우러진 맛!</p>
+      <p>부드러운 계란과<span class="mobile-br"></span>
+      토마토가 어우러진 맛!</p>
     </div>
   </div>
 
@@ -351,6 +357,31 @@
       }
 
       document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+      
+      function loadRecentRecipes() {
+    	  const container = document.getElementById('recent-recipes-list');
+    	  if (!container) return;
+
+    	  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    	  container.innerHTML = '';
+
+    	  if (recent.length === 0) {
+    	    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+    	    return;
+    	  }
+
+    	  recent.forEach(({ href, img, title }) => {
+    	    const li = document.createElement('li');
+    	    li.innerHTML = `
+    	      <a href="${href}" class="recent-link">
+    	        <img src="${img}" alt="${title}">
+    	        <span>${title}</span>
+    	      </a>
+    	    `;
+    	    container.appendChild(li);
+    	  });
+    	}
+
     </script>
 </body>
 </html>
