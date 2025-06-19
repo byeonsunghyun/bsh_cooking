@@ -95,6 +95,83 @@
   </footer>
 
 	<script>
+const cards = document.querySelectorAll('.recipe-card');
+    const texts = document.querySelectorAll('.recipe-text');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    cards.forEach(card => observer.observe(card));
+    texts.forEach(text => observer.observe(text));
+    
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollBtn.classList.add('show');
+      } else {
+        scrollBtn.classList.remove('show');
+      }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    const navWrapper = document.querySelector('.nav-wrapper');
+    const nav = navWrapper.querySelector('nav');
+    const leftBtn = navWrapper.querySelector('.nav-arrow.left');
+    const rightBtn = navWrapper.querySelector('.nav-arrow.right');
+
+    function updateNavArrows() {
+      const scrollLeft = nav.scrollLeft;
+      const maxScroll = nav.scrollWidth - nav.clientWidth;
+
+      leftBtn.style.display = scrollLeft > 10 ? 'flex' : 'none';
+      rightBtn.style.display = scrollLeft < maxScroll - 10 ? 'flex' : 'none';
+    }
+
+    leftBtn.addEventListener('click', () => {
+      nav.scrollBy({ left: -100, behavior: 'smooth' });
+    });
+
+    rightBtn.addEventListener('click', () => {
+      nav.scrollBy({ left: 100, behavior: 'smooth' });
+    });
+
+    nav.addEventListener('scroll', updateNavArrows);
+    window.addEventListener('resize', updateNavArrows);
+    window.addEventListener('DOMContentLoaded', updateNavArrows);
+ 	
+    function toggleSidebar() {
+    	  const sidebar = document.getElementById('sidebar');
+    	  sidebar.classList.toggle('open');
+    	}
+
+    window.addEventListener('scroll', function () {
+        const toggleButton = document.querySelector('.sidebar-toggle-button');
+        if (window.scrollY > 10) {
+          toggleButton.classList.add('scrolled');
+        } else {
+          toggleButton.classList.remove('scrolled');
+        }
+      });
+    
+    function handleSearch(event) {
+        event.preventDefault(); // 제출 막기
+        alert("🔧 검색 기능은 준비 중입니다!");
+      }
+		
   const repoName = 'bsh_cooking'; // ← 여기에 본인 GitHub 레포 이름 입력
 
 document.querySelectorAll('.recipe-card').forEach(card => {
