@@ -47,7 +47,7 @@ main.recipe-detail {
 
 .recipe-detail h1 {
   font-size: 2rem;
-  color: #ff6f61;
+  color: #111111;
   font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
   margin-bottom: 0.2em;
   text-align: center;
@@ -109,7 +109,7 @@ main.recipe-detail {
 .tip-box h2 {
   font-size: 1.4rem;
   margin-bottom: 12px;
-  color: #ff6f61;
+  color: #111111;
   font-family: 'Gowun Dodum', 'Nanum Gothic', sans-serif;
 }
 
