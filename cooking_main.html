@@ -370,25 +370,25 @@
       }
 
 	 document.querySelectorAll('.recipe-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const href = card.getAttribute('href');
-          const img = card.querySelector('img')?.getAttribute('src') || '';
-          const title = card.parentElement.querySelector('h3')?.innerText || '';
+  card.addEventListener('click', () => {
+    const hrefRaw = card.getAttribute('href');
+    const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+    const rawTitle = card.parentElement.querySelector('h3')?.innerText || '';
 
-          const newRecipe = { href, img, title };
+    // ✅ 모든 이모지 제거
+    const title = rawTitle.replace(/\p{Extended_Pictographic}/gu, '').trim();
 
-          let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    const newRecipe = { href: hrefRaw, img: imgRaw, title };
 
-          // 중복 제거
-          recent = recent.filter(r => r.href !== href);
+    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    recent = recent.filter(r => r.href !== hrefRaw);
+    recent.unshift(newRecipe);
+    if (recent.length > 10) recent = recent.slice(0, 10);
 
-          // 최신 순 추가 (최대 5개)
-          recent.unshift(newRecipe);
-          if (recent.length > 10) recent = recent.slice(0, 10);
+    localStorage.setItem('recentRecipes', JSON.stringify(recent));
+  });
+});
 
-          localStorage.setItem('recentRecipes', JSON.stringify(recent));
-        });
-      });
 
       // 사이드바에 표시
       function loadRecentRecipes() {
