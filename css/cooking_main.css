@@ -635,8 +635,9 @@ footer {
     border-right: 1px solid #ffddd8;
     border-bottom: none;
     padding: 1rem 0.8rem;
-    font-size: 0.75rem !important;
+    font-size: 0.65rem !important;
     white-space: nowrap;
+	  font-family: 'Jua', sans-serif;
   }
   
 
