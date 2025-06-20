@@ -182,7 +182,7 @@ color: #a67c52;
 }
 
 .sidebar-login-link:hover {
-  color: #e85b50;
+  color: #b33a3a; /* 좀 더 진한 빨간색 또는 원하는 색상으로 변경 가능 */
 }
 
 /* ✅ 로그인 아래 경계선 */
