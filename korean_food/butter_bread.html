@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/cooking_main.css">
+	<link rel="stylesheet" href="../css/cooking_recipe.css">
+  <title>카라멜 식빵 | 뭉치의 요리 레시피</title>
+    <link rel="icon" href="../image/icon.png" type="image/png">
+</head>
+<body>
+  <header>
+    <a href="../cooking_main" class="logo-link">
+      <div class="logo-wrap">
+        <img src="../image/title_logo.png" alt="로고" class="logo" />
+      </div>
+    </a>
+  </header>
+
+	<button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+	  <div class="sidebar-divider"></div>
+
+<form class="search-container" onsubmit="handleSearch(event)">
+  <div class="tag-title2">🔍 검색하기</div>
+  <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+</form>
+
+	  <div class="recent-recipes">
+  <div class="tag-title2">🕘 최근 본 레시피</div>
+  <ul id="recent-recipes-list"></ul>
+</div>
+
+<!-- 빈 공간을 차지하는 spacer -->
+<div class="spacer"></div>
+
+<a href="../login" class="sidebar-login-link">로그인</a>
+<div class="sidebar-divider-below-login"></div>
+<div class="sidebar-social-icons">
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="../image/instagram.png" alt="Instagram">
+  </a>
+  <a href="#" onclick="alert('🔒'); return false;">
+    <img src="../image/kakaotalk.png" alt="KakaoTalk">
+  </a>
+</div>
+
+  </div>
+
+  <main class="recipe-detail">
+    <h1 style="text-align:center;">- 카라멜 식빵 -</h1>
+    <p class="subtitle">한입 베어물면 퍼지는 달콤한 풍미!</p>
+	   <div class="tags" style="justify-content: center; margin-bottom: 24px;">
+	  <span class="tag time">20분 이내</span>
+	  <span class="tag sweet">달콤한</span>
+	</div>
+
+    <div class="recipe-image">
+      <img src="../image/butter_bread.jpg" alt="카라멜 식빵" />
+    </div>
+
+    <section class="recipe-info">
+      <h2>📝 재료</h2>
+      <ul>
+        <li>식빵 - 2~3개</li>
+		<li>설탕 - 4스푼</li>
+        <li>물 - 3스푼</li>
+        <li>버터 - 2스푼</li>
+        <li>우유 - 5스푼</li>
+      </ul>
+    </section>
+
+    <section class="recipe-steps">
+      <h2>🍳 만드는 법</h2>
+	  <ol>
+		  <li>식빵을 주사위 크기로 한 입 크기로 잘라줍니다.</li>
+		  <li>팬에 잘라둔 식빵을 약불에서 5분 이상 노릇노릇하게 굽습니다. (계속 저어가며 구워주세요)</li>
+		  <li>식빵이 적당히 구워지면 팬에서 꺼낸 뒤, 같은 팬에 설탕과 물을 넣고 중불에서 끓입니다. (절대 젓지 마세요)</li>
+		  <li>설탕물이 황토색으로 변하기 시작하면 버터를 넣어 녹입니다.</li>
+		  <li>가장자리가 황금빛 갈색으로 변하면 우유를 넣고 부드럽게 저어줍니다.</li>
+		  <li>소스가 고루 섞이면 구워둔 식빵을 넣고 골고루 버무립니다.</li>
+		  <li>완성된 카라멜 식빵을 쟁반에 펼쳐 담고 약 10분간 식혀주면 완성입니다.</li>
+		</ol>
+    </section>
+
+	<section class="tip-box">
+	  <h2>💡 TIP</h2>
+	  <p>찬 우유를 넣으면 튈 수 있으니, 우유를 전자레인지에 20초 데워주면 좋습니다.</p>
+	</section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Byeon Sung Hyun. All rights reserved.</p>
+  </footer>
+
+	<button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
+
+<script>
+const scrollBtn = document.getElementById('scrollToTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('show');
+    } else {
+      scrollBtn.classList.remove('show');
+    }
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+	
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+  }
+
+  window.addEventListener('scroll', function () {
+    const toggleButton = document.querySelector('.sidebar-toggle-button');
+    if (window.scrollY > 10) {
+      toggleButton.classList.add('scrolled');
+    } else {
+      toggleButton.classList.remove('scrolled');
+    }
+  });
+
+  function handleSearch(event) {
+    event.preventDefault();
+    alert("🔧 검색 기능은 준비 중입니다!");
+  }
+
+ const basePath = '/bsh_cooking/'; // 깃허브 저장소 루트 경로
+
+document.querySelectorAll('.recipe-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const hrefRaw = card.getAttribute('href');
+    const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+    const title = card.parentElement.querySelector('h3')?.innerText || '';
+
+    // 저장할 때는 원본 경로 그대로 저장
+    const newRecipe = { href: hrefRaw, img: imgRaw, title };
+
+    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    recent = recent.filter(r => r.href !== hrefRaw);
+    recent.unshift(newRecipe);
+    if (recent.length > 10) recent = recent.slice(0, 10);
+
+    localStorage.setItem('recentRecipes', JSON.stringify(recent));
+  });
+});
+
+function loadRecentRecipes() {
+  const container = document.getElementById('recent-recipes-list');
+  if (!container) return;
+
+  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+  container.innerHTML = '';
+
+  if (recent.length === 0) {
+    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+    return;
+  }
+
+  recent.forEach(({ href, img, title }) => {
+    // img가 상대경로일 경우 기준 경로(basePath)와 합쳐서 절대경로 만듦
+    const imgUrl = img.startsWith('http') ? img : basePath + img.replace(/^(\.\.\/)+/, '');
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="${href}" class="recent-link">
+        <img src="${imgUrl}" alt="${title}">
+        <span>${title}</span>
+      </a>
+    `;
+    container.appendChild(li);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+
+</script>
+</body>
+</html>
