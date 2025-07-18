@@ -313,8 +313,28 @@
       });
     
     function handleSearch(event) {
-        event.preventDefault(); // 제출 막기
-        alert("🔧 검색 기능은 준비 중입니다!");
+        event.preventDefault();
+
+        const input = event.target.keyword.value.trim().toLowerCase();
+        const wrappers = document.querySelectorAll('.recipe-wrapper');
+
+        if (!input) {
+          // 입력 없을 때 전체 다시 보이기
+          wrappers.forEach(w => w.style.display = '');
+          return;
+        }
+
+        wrappers.forEach(wrapper => {
+          const text = wrapper.innerText.toLowerCase();
+          if (text.includes(input)) {
+            wrapper.style.display = '';
+          } else {
+            wrapper.style.display = 'none';
+          }
+        });
+
+        // 결과로 스크롤 올리기
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
 	document.querySelectorAll('.recipe-card').forEach(card => {
