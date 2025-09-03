@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="./image/icon.png" type="image/png">
+<title>레시피 HTML 생성기</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fff8f0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    width: 100%;
+    max-width: 900px;
+  }
+  h1 {
+    text-align: center;
+    color: #d35400;
+  }
+  label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  input[type="text"], select, textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  input::placeholder, textarea::placeholder {
+    color: rgba(0,0,0,0.4);
+  }
+  textarea {
+    resize: vertical;
+  }
+  #ingredients, #steps {
+    height: auto;
+    min-height: 2.4em;
+  }
+  button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #e67e22;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #d35400;
+  }
+  #output, #cardOutput {
+    width: 100%;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 13px;
+  }
+  .output-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  .copy-btn:hover {
+    background-color: #2980b9;
+  }
+  /* 복사 메시지 */
+  .copy-msg {
+    margin-top: 5px;
+    font-size: 12px;
+    color: green;
+    display: none;
+  }
+
+  /* 카드 2열 배치 */
+  .recipe-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .recipe-wrapper {
+    width: 48%;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>레시피 HTML 생성기</h1>
+
+<form>
+  <label>요리 이름:</label>
+  <input type="text" id="name" placeholder="예: 김치찌개">
+
+  <label>요리 설명:</label>
+  <input type="text" id="desc" placeholder="예: 얼큰하고 맛있는 집밥 레시피">
+
+  <label>요리 시간:</label>
+  <input type="text" id="time" placeholder="예: 30분 이내">
+
+  <label>요리 맛:</label>
+  <select id="taste" onchange="setTasteCode()">
+    <option value="spicy">매콤한</option>
+    <option value="sweet">달콤한</option>
+    <option value="salty">짭짤한</option>
+    <option value="sour">새콤한</option>
+    <option value="light">담백한</option>
+    <option value="nutty">고소한</option>
+    <option value="hot">얼큰한</option>
+  </select>
+
+  <input type="hidden" id="tasteCode">
+
+  <label>요리 이미지 이름:</label>
+  <input type="text" id="img" placeholder="예: kimchi_stew">
+
+  <label>팁:</label>
+  <input type="text" id="tip" placeholder="예: 두부는 마지막에 넣어야 부서지지 않아요">
+
+  <label>재료 (쉼표로 구분):</label>
+  <textarea id="ingredients" rows="2" placeholder="예: 김치 300g, 돼지고기 300g, 두부 100g"></textarea>
+
+  <label>요리 방법 (쉼표로 구분):</label>
+  <textarea id="steps" rows="2" placeholder="예: 김치 썰기, 돼지고기 볶기, 끓이기"></textarea>
+
+  <button type="button" onclick="generateHTML()">레시피 HTML 생성</button>
+  <button type="button" onclick="generateCardHTML()">레시피 카드 HTML 생성</button>
+</form>
+
+<h2>레시피 HTML 결과</h2>
+<div class="output-container">
+  <button class="copy-btn" onclick="copyToClipboard('output', 'msg1')">복사하기</button>
+  <textarea id="output" rows="10"></textarea>
+  <div id="msg1" class="copy-msg">레시피 HTML 복사되었습니다.</div>
+</div>
+
+<h2>레시피 HTML 결과 (JavaScript)</h2>
+<div class="output-container">
+  <button class="copy-btn" onclick="copyToClipboard('fixedText', 'msg3')">복사하기</button>
+  <textarea id="fixedText" rows="10" readonly><script>
+const scrollBtn = document.getElementById('scrollToTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('show');
+    } else {
+      scrollBtn.classList.remove('show');
+    }
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+	
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+  }
+
+  window.addEventListener('scroll', function () {
+    const toggleButton = document.querySelector('.sidebar-toggle-button');
+    if (window.scrollY > 10) {
+      toggleButton.classList.add('scrolled');
+    } else {
+      toggleButton.classList.remove('scrolled');
+    }
+  });
+
+  function handleSearch(event) {
+    event.preventDefault();
+    alert("🔧 검색 기능은 준비 중입니다!");
+  }
+
+ const basePath = '/bsh_cooking/'; // 깃허브 저장소 루트 경로
+
+document.querySelectorAll('.recipe-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const hrefRaw = card.getAttribute('href');
+    const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+    const title = card.parentElement.querySelector('h3')?.innerText || '';
+
+    // 저장할 때는 원본 경로 그대로 저장
+    const newRecipe = { href: hrefRaw, img: imgRaw, title };
+
+    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+    recent = recent.filter(r => r.href !== hrefRaw);
+    recent.unshift(newRecipe);
+    if (recent.length > 10) recent = recent.slice(0, 10);
+
+    localStorage.setItem('recentRecipes', JSON.stringify(recent));
+  });
+});
+
+function loadRecentRecipes() {
+  const container = document.getElementById('recent-recipes-list');
+  if (!container) return;
+
+  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+  container.innerHTML = '';
+
+  if (recent.length === 0) {
+    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+    return;
+  }
+
+  recent.forEach(({ href, img, title }) => {
+    // img가 상대경로일 경우 기준 경로(basePath)와 합쳐서 절대경로 만듦
+    const imgUrl = img.startsWith('http') ? img : basePath + img.replace(/^(\.\.\/)+/, '');
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="${href}" class="recent-link">
+        <img src="${imgUrl}" alt="${title}">
+        <span>${title}</span>
+      </a>
+    `;
+    container.appendChild(li);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+
+</script></textarea>
+  <div id="msg3" class="copy-msg">스크립트가 복사되었습니다.</div>
+</div>
+
+<h2>레시피 카드 HTML 결과</h2>
+<div class="output-container">
+  <button class="copy-btn" onclick="copyToClipboard('cardOutput', 'msg2')">복사하기</button>
+  <textarea id="cardOutput" rows="10"></textarea>
+  <div id="msg2" class="copy-msg">레시피 카드가 복사되었습니다.</div>
+</div>
+</div>
+
+<script>
+function setTasteCode() {
+  const tasteSelect = document.getElementById("taste");
+  const tasteCodeInput = document.getElementById("tasteCode");
+  tasteCodeInput.value = tasteSelect.value;
+}
+
+function copyToClipboard(id, msgId) {
+  const textarea = document.getElementById(id);
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+
+  const msgDiv = document.getElementById(msgId);
+  msgDiv.style.display = "block";
+  setTimeout(() => {
+    msgDiv.style.display = "none";
+  }, 2000);
+}
+
+const template = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/cooking_main.css">
+  <link rel="stylesheet" href="../css/cooking_recipe.css">
+  <title>요리 이름 | 뭉치의 요리 레시피</title>
+  <link rel="icon" href="../image/icon.png" type="image/png">
+</head>
+<body>
+  <header>
+    <a href="../cooking_main" class="logo-link">
+      <div class="logo-wrap">
+        <img src="../image/title_logo.png" alt="로고" class="logo" />
+      </div>
+    </a>
+  </header>
+
+  <button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-divider"></div>
+    <form class="search-container" onsubmit="handleSearch(event)">
+      <div class="tag-title2">🔍 검색하기</div>
+      <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+    </form>
+    <div class="recent-recipes">
+      <div class="tag-title2">🕘 최근 본 레시피</div>
+      <ul id="recent-recipes-list"></ul>
+    </div>
+    <div class="spacer"></div>
+    <a href="../login" class="sidebar-login-link">로그인</a>
+    <div class="sidebar-divider-below-login"></div>
+    <div class="sidebar-social-icons">
+      <a href="#" onclick="alert('🔒'); return false;">
+        <img src="../image/instagram.png" alt="Instagram">
+      </a>
+      <a href="#" onclick="alert('🔒'); return false;">
+        <img src="../image/kakaotalk.png" alt="KakaoTalk">
+      </a>
+    </div>
+  </div>
+
+  <main class="recipe-detail">
+    <h1 style="text-align:center;">- 요리 이름 -</h1>
+    <p class="subtitle">요리 설명</p>
+
+    <div class="tags" style="justify-content: center; margin-bottom: 24px;">
+      <span class="tag time">요리 시간</span>
+      <span class="tag tasteCode">요리 맛</span>
+    </div>
+
+    <div class="recipe-image">
+      <img src="../image/요리 이미지 이름.jpg" alt="요리 이름" />
+    </div>
+
+    <section class="recipe-info">
+      <h2>📝 재료</h2>
+      <ul>
+        재료리스트
+      </ul>
+    </section>
+
+    <section class="recipe-steps">
+      <h2>🍳 만드는 법</h2>
+      <ol>
+        요리방법리스트
+      </ol>
+    </section>
+
+    <section class="tip-box">
+      <h2>💡 TIP</h2>
+      <p>팁</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Byeon Sung Hyun. All rights reserved.</p>
+  </footer>
+
+  <button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
+</body>
+</html>
+`;
+
+const cardTemplate = `
+<div class="recipe-wrapper">
+  <a href="/bsh_cooking/western_food/요리 이미지 이름" class="recipe-card">
+    <div class="image-wrap">
+      <img src="./image/요리 이미지 이름.jpg" onerror="this.onerror=null; this.src='./image/ready.png';" alt="요리 이름" />
+    </div>
+  </a>
+  <div class="recipe-text">
+    <h3>요리 이름</h3>
+    <p>요리 설명</p>
+    <div class="tags">
+      <span class="tag time">요리 시간</span>
+      <span class="tag tasteCode">요리 맛</span>
+    </div>
+  </div>
+</div>
+`;
+
+function generateHTML() {
+  let html = template;
+
+  const tasteSelect = document.getElementById("taste");
+
+  const data = {
+    "요리 이름": document.getElementById("name").value,
+    "요리 설명": document.getElementById("desc").value,
+    "요리 시간": document.getElementById("time").value,
+    "tasteCode": tasteSelect.value,
+    "요리 맛": tasteSelect.options[tasteSelect.selectedIndex].text,
+    "요리 이미지 이름": document.getElementById("img").value,
+    "팁": document.getElementById("tip").value
+  };
+
+  for (const key in data) {
+    const regex = new RegExp(key, "g");
+    html = html.replace(regex, data[key]);
+  }
+
+  const ingredients = document.getElementById("ingredients").value
+    .split(",").map(s => `<li>${s.trim()}</li>`).join("\n");
+  html = html.replace("재료리스트", ingredients);
+
+  const steps = document.getElementById("steps").value
+    .split(",").map(s => `<li>${s.trim()}</li>`).join("\n");
+  html = html.replace("요리방법리스트", steps);
+
+  document.getElementById("output").value = html;
+}
+
+function generateCardHTML() {
+  let cardHTML = cardTemplate;
+
+  const tasteSelect = document.getElementById("taste");
+
+  const data = {
+    "요리 이름": document.getElementById("name").value,
+    "요리 설명": document.getElementById("desc").value,
+    "요리 시간": document.getElementById("time").value,
+    "tasteCode": tasteSelect.value, // class용
+    "요리 맛": tasteSelect.options[tasteSelect.selectedIndex].text, // span 내용용
+    "요리 이미지 이름": document.getElementById("img").value
+  };
+
+
+  for (const key in data) {
+    const regex = new RegExp(key, "g");
+    cardHTML = cardHTML.replace(regex, data[key]);
+  }
+
+  document.getElementById("cardOutput").value = cardHTML;
+}
+</script>
+</body>
+</html>
