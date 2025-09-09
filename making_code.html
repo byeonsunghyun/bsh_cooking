@@ -372,6 +372,9 @@ const cardTemplate = `
       <span class="tag time">요리 시간</span>
       <span class="tag tasteCode">요리 맛</span>
     </div>
+	<div class="ingredients" style="display: none;">
+    재료
+  </div>
   </div>
 </div>
 `;
@@ -411,6 +414,7 @@ function generateCardHTML() {
   let cardHTML = cardTemplate;
 
   const tasteSelect = document.getElementById("taste");
+  const ingredients = document.getElementById("ingredients").value;
 
   const data = {
     "요리 이름": document.getElementById("name").value,
@@ -418,9 +422,9 @@ function generateCardHTML() {
     "요리 시간": document.getElementById("time").value,
     "tasteCode": tasteSelect.value, // class용
     "요리 맛": tasteSelect.options[tasteSelect.selectedIndex].text, // span 내용용
-    "요리 이미지 이름": document.getElementById("img").value
+    "요리 이미지 이름": document.getElementById("img").value,
+    "재료": ingredients // 재료 추가
   };
-
 
   for (const key in data) {
     const regex = new RegExp(key, "g");
