@@ -9,11 +9,18 @@
 
 ## 🖼️ 미리보기
 
-### 💻 데스크탑 화면
-![데스크탑 화면](./image/capture.jpg)
-
-### 📱 모바일 화면
-![모바일 화면](./image/capture_mobile.jpg)
+<table>
+  <tr>
+    <td align="center">
+      <b>💻 데스크탑 화면</b><br>
+      <img src="./image/capture.jpg" alt="데스크탑 화면" width="300"/>
+    </td>
+    <td align="center">
+      <b>📱 모바일 화면</b><br>
+      <img src="./image/capture_mobile.jpg" alt="모바일 화면" width="200"/>
+    </td>
+  </tr>
+</table>
 
 ## 🧩 기능
 
