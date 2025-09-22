@@ -9,9 +9,11 @@
 
 ## 🖼️ 미리보기
 
-![프로젝트 스크린샷](./image/title_logo.png)
+### 💻 데스크탑 화면
+![데스크탑 화면](./image/capture.jpg)
 
----
+### 📱 모바일 화면
+![모바일 화면](./image/capture_mobile.jpg)
 
 ## 🧩 기능
 
