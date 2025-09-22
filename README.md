@@ -48,6 +48,6 @@
 
 ## ⚙️ 사용 기술
 
-- HTML5 / CSS3 / JavaScript
+- HTML / CSS / JavaScript
 - LocalStorage (최근 본 레시피 저장)
 
