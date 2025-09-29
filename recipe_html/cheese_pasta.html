@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+	<html lang="ko">
+	<head>
+	  <meta charset="UTF-8" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	  <link rel="stylesheet" href="../css/cooking_main.css">
+	  <link rel="stylesheet" href="../css/cooking_recipe.css">
+	  <title>원팬 치즈 파스타 | 뭉치의 요리 레시피</title>
+	  <link rel="icon" href="../image/icon.png" type="image/png">
+	</head>
+	<body>
+	  <header>
+	    <a href="../cooking_main" class="logo-link">
+	      <div class="logo-wrap">
+	        <img src="../image/title_logo.png" alt="로고" class="logo" />
+	      </div>
+	    </a>
+	  </header>
+	
+	  <button class="sidebar-toggle-button" onclick="toggleSidebar()">☰</button>
+	
+	  <div class="sidebar" id="sidebar">
+	    <div class="sidebar-divider"></div>
+	    <form class="search-container" onsubmit="handleSearch(event)">
+	      <div class="tag-title2">🔍 검색하기</div>
+	      <input type="text" name="keyword" placeholder="재료나 요리명을 입력해보세요" />
+	    </form>
+	    <div class="recent-recipes">
+	      <div class="tag-title2">🕘 최근 본 레시피</div>
+	      <ul id="recent-recipes-list"></ul>
+	    </div>
+	    <div class="spacer"></div>
+	    <a href="../login" class="sidebar-login-link">로그인</a>
+	    <div class="sidebar-divider-below-login"></div>
+	    <div class="sidebar-social-icons">
+	      <a href="#" onclick="alert('🔒'); return false;">
+	        <img src="../image/instagram.png" alt="Instagram">
+	      </a>
+	      <a href="#" onclick="alert('🔒'); return false;">
+	        <img src="../image/kakaotalk.png" alt="KakaoTalk">
+	      </a>
+	      <a href="https://byeonsunghyun.github.io/bsh_hub/bshhub">
+		    <img src="image/hub_logo_bg.png" alt="BshHub">
+		  </a>
+	    </div>
+	  </div>
+	
+	  <main class="recipe-detail">
+	    <h1 style="text-align:center;">- 원팬 치즈 파스타 -</h1>
+	    <p class="subtitle">설거지 부담 없는 치즈 파스타!</p>
+	
+	    <div class="tags" style="justify-content: center; margin-bottom: 24px;">
+	      <span class="tag time">15분 이내</span>
+	      <span class="tag salty">짭짤한</span>
+	    </div>
+	
+	    <div class="recipe-image">
+	      <img src="../image/cheese_pasta.jpg" alt="원팬 치즈 파스타" />
+	    </div>
+	
+	    <section class="recipe-info">
+	      <h2>📝 재료</h2>
+	      <ul>
+	        <li>물 500g</li>
+          <li>파스타면</li>
+          <li>체다치즈 3장</li>
+          <li>우유 200ml</li>
+          <li>토마토 소스 3큰술</li>
+          <li>다진 마늘 1/2큰술</li>
+          <li>꽃소금</li>
+          <li>후추</li>
+          <li>파슬리</li>
+	      </ul>
+	    </section>
+	
+	    <section class="recipe-steps">
+	      <h2>🍳 만드는 법</h2>
+	      <ol>
+	        <li>물과 파스타 면을 함께 넣고 10분간 끓입니다.</li>
+          <li>우유를 넣고 끓으면 체다치즈와 토마토 소스를 추가합니다.</li>
+          <li>소스가 걸쭉해지기 시작하면 다진 마늘을 넣고 섞어줍니다.</li>
+          <li>완전히 걸쭉해지면 후추와 파슬리를 뿌려 마무리합니다.</li>
+	      </ol>
+	    </section>
+	
+	    <section class="tip-box">
+	      <h2>💡 TIP</h2>
+	      <p>후추와 마늘이 치즈의 느끼한 맛을 잡아줍니다.</p>
+	    </section>
+	  </main>
+	
+	  <footer>
+	    <p>&copy; 2025 Byeon Sung Hyun. All rights reserved.</p>
+	  </footer>
+	
+	  <button id="scrollToTopBtn" title="맨 위로 가기">↑</button>
+
+    		  <script>
+		const scrollBtn = document.getElementById('scrollToTopBtn');
+		
+		  window.addEventListener('scroll', () => {
+		    if (window.scrollY > 300) {
+		      scrollBtn.classList.add('show');
+		    } else {
+		      scrollBtn.classList.remove('show');
+		    }
+		  });
+		
+		  scrollBtn.addEventListener('click', () => {
+		    window.scrollTo({
+		      top: 0,
+		      behavior: 'smooth'
+		    });
+		  });
+			
+		  function toggleSidebar() {
+		    const sidebar = document.getElementById('sidebar');
+		    sidebar.classList.toggle('open');
+		  }
+		
+		  window.addEventListener('scroll', function () {
+		    const toggleButton = document.querySelector('.sidebar-toggle-button');
+		    if (window.scrollY > 10) {
+		      toggleButton.classList.add('scrolled');
+		    } else {
+		      toggleButton.classList.remove('scrolled');
+		    }
+		  });
+		
+		  function handleSearch(event) {
+		    event.preventDefault();
+		    alert("🔧 검색 기능은 준비 중입니다!");
+		  }
+		
+		 const basePath = '/bsh_cooking/'; // 깃허브 저장소 루트 경로
+		
+		document.querySelectorAll('.recipe-card').forEach(card => {
+		  card.addEventListener('click', () => {
+		    const hrefRaw = card.getAttribute('href');
+		    const imgRaw = card.querySelector('img')?.getAttribute('src') || '';
+		    const title = card.parentElement.querySelector('h3')?.innerText || '';
+		
+		    // 저장할 때는 원본 경로 그대로 저장
+		    const newRecipe = { href: hrefRaw, img: imgRaw, title };
+		
+		    let recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+		    recent = recent.filter(r => r.href !== hrefRaw);
+		    recent.unshift(newRecipe);
+		    if (recent.length > 10) recent = recent.slice(0, 10);
+		
+		    localStorage.setItem('recentRecipes', JSON.stringify(recent));
+		  });
+		});
+		
+		function loadRecentRecipes() {
+		  const container = document.getElementById('recent-recipes-list');
+		  if (!container) return;
+		
+		  const recent = JSON.parse(localStorage.getItem('recentRecipes') || '[]');
+		  container.innerHTML = '';
+		
+		  if (recent.length === 0) {
+		    container.innerHTML = '<li class="no-recent">최근 본 레시피가 없습니다.</li>';
+		    return;
+		  }
+		
+		  recent.forEach(({ href, img, title }) => {
+		    // img가 상대경로일 경우 기준 경로(basePath)와 합쳐서 절대경로 만듦
+		    const imgUrl = img.startsWith('http') ? img : basePath + img.replace(/^(\.\.\/)+/, '');
+		
+		    const li = document.createElement('li');
+		    li.innerHTML = `
+		      <a href="${href}" class="recent-link">
+		        <img src="${imgUrl}" alt="${title}">
+		        <span>${title}</span>
+		      </a>
+		    `;
+		    container.appendChild(li);
+		  });
+		}
+		
+		document.addEventListener('DOMContentLoaded', loadRecentRecipes);
+		
+		</script>
+	</body>
+	</html>
+	
